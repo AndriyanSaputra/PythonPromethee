@@ -1,0 +1,34 @@
+<div class="box">
+  <div class="box-body">
+
+    <div class="box-header">
+
+     <h3 class="box-title">Disiplin</h3> 
+     {% comment %} <a type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default"> 
+       Tambah <i class="fa fa-plus"></i> 
+     </a> {% endcomment %}
+        
+   </div>
+   <table id="example1" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Kelas</th>
+        <th>Olimpiade</th>
+        <th>Aksi</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for kl in kelas %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{kl.siswa.nama}}</td>
+        <td>{{kl.jenjang}}</td>
+<td>{{kl.mata_pelajaran}}</td>
+</tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
