@@ -27,95 +27,95 @@ class ListDisiplinView(View):
 		return render(request, template, data)
 
 
-# class SaveKelasView(View):
-#     def post(self, request):
-#         template = 'kelas/index.html'
-#         form = KelasForm(request.POST or None)
-#         if form.is_valid():
-#             # dari ngambil data
-#             # sampai simpan data
-#             kelas = Kelas()
-#             kelas.siswa = form.cleaned_data['siswa']
-#             kelas.jenjang = form.cleaned_data['jenjang']
-#             kelas.mata_pelajaran = form.cleaned_data['mata_pelajaran']
-#             kelas.nilai = form.cleaned_data['nilai']
-#             messages.add_message(request, messages.INFO, 'Data Berhasil Disimpan')   
-#             kelas.save()
-#             return redirect('kelas:view')
-#         else:
-#             kelas = Kelas.objects.all()
-#             data = {
+class SavedisiplinView(View):
+    def post(self, request):
+        template = 'disiplin/index.html'
+        form = DisiplinForm(request.POST or None)
+        if form.is_valid():
+            # dari ngambil data
+            # sampai simpan data
+            Disiplin = Disiplin()
+            Disiplin.pekerja = form.cleaned_data['pekerja']
+            disiplin.jenjang = form.cleaned_data['jenjang']
+            disiplin.mata_pelajaran = form.cleaned_data['mata_pelajaran']
+            disiplin.nilai = form.cleaned_data['nilai']
+            messages.add_message(request, messages.INFO, 'Data Berhasil Disimpan')   
+            disiplin.save()
+            return redirect('disiplin:view')
+        else:
+            disiplin = Disiplin.objects.all()
+            data = {
 
-#                 'form': form,
-#                 'kelas': kelas,
-#             }
-#             messages.add_message(request, messages.INFO, 'Data Gagal Disimpan !!')               
-#             return render(request, template, data)
-
-
-# class EditKelasView(View):
-#     template = 'kelas/edit.html'
-
-#     def get(self, request, id):
-#         kelas = Kelas.objects.filter(id=id)
-#         if not kelas.exists():
-#             return redirect('kelas:view')
-#         kelas = kelas.first()
-#         initial = {
-
-#             'id': kelas.id,
-#             'jenjang': kelas.jenjang,
-#             'mata_pelajaran': kelas.mata_pelajaran,
-#             'nilai': kelas.nilai,
-#             'siswa': kelas.siswa,
-#         }
-
-#         form = KelasForm(initial=initial)
-#         kelas = Kelas.objects.all()
-#         data = {
-#             'id':id,
-#             'form': form,
-#             'form_mode' : 'edit',
-#             'kelas' : kelas,
-#         }
-#         return render(request, self.template, data)
+                'form': form,
+                'disiplin': disiplin,
+            }
+            messages.add_message(request, messages.INFO, 'Data Gagal Disimpan !!')               
+            return render(request, template, data)
 
 
+class EditDisiplinView(View):
+    template = 'disiplin/edit.html'
 
-# class UpdateKelasView(View):
+    def get(self, request, id):
+        disiplin = disiplin.objects.filter(id=id)
+        if not disiplin.exists():
+            return redirect('disiplin:view')
+        disiplin = disiplin.first()
+        initial = {
 
-#     def post(self, request):
+            'id': disiplin.id,
+            'jenjang': disiplin.jenjang,
+            'mata_pelajaran': disiplin.mata_pelajaran,
+            'nilai': disiplin.nilai,
+            'pekerja': disiplin.pekerja,
+        }
+
+        form = DisiplinForm(initial=initial)
+        disiplin = Disiplin.objects.all()
+        data = {
+            'id':id,
+            'form': form,
+            'form_mode' : 'edit',
+            'disiplin' : disiplin,
+        }
+        return render(request, self.template, data)
+
+
+
+class UpdateDisiplinView(View):
+
+    def post(self, request):
         
-#         template = "kelas/index.html"
-#         form = KelasForm(request.POST or None)
-#         if form.is_valid():
-#             id = form.cleaned_data['id']
-#             kelas = Kelas.objects.get(pk=id)
-#             kelas.jenjang = form.cleaned_data['jenjang']
-#             kelas.mata_pelajaran = form.cleaned_data['mata_pelajaran']
-#             kelas.nilai = form.cleaned_data['nilai']
-#             kelas.siswa = form.cleaned_data['siswa']
-#             messages.add_message(request, messages.INFO, 'Data Berhasil Diupdate')               
-#             kelas.save(force_update=True)
-#             return redirect('kelas:view')
-#         else:
-#             kelas = Kelas.objects.all()
-#             data    =  {
-#                 'form_mode':'edit',
-#                 'form': form,
-#                 'kelas': kelas,
-#             }
-#             messages.add_message(request, messages.INFO, 'Data Gagal Diupdate !!')                           
-#             # return render(request, template, data)
-#             return HttpResponse(form.errors)
+        template = "disiplin/index.html"
+        form = DisiplinForm(request.POST or None)
+        if form.is_valid():
+            id = form.cleaned_data['id']
+            disiplin = disiplin.objects.get(pk=id)
+            disiplin.jenjang = form.cleaned_data['jenjang']
+            disiplin.mata_pelajaran = form.cleaned_data['mata_pelajaran']
+            disiplin.nilai = form.cleaned_data['nilai']
+            disiplin.pekerja = form.cleaned_data['pekerja']
+            messages.add_message(request, messages.INFO, 'Data Berhasil Diupdate')               
+            disiplin.save(force_update=True)
+            return redirect('disiplin:view')
+        else:
+            disiplin = disiplin.objects.all()
+            data    =  {
+                'form_mode':'edit',
+                'form': form,
+                'disiplin': disiplin,
+            }
+            messages.add_message(request, messages.INFO, 'Data Gagal Diupdate !!')                           
+            # return render(request, template, data)
+            return HttpResponse(form.errors)
 
-# class HapusKelasView(View):
+class HapusDisiplinView(View):
 
-#     def get(self, request, id):
-#         kelas = Kelas.objects.filter(id=id)
-#         if kelas.exists():
-#             kelas.first().delete()
-#             messages.add_message(request, messages.INFO, 'Data Berhasil Dihapus')                                       
-# return redirect('kelas:view')
-#         else:
-# messages.add_message(request, messages.INFO, 'Data Gagal Dihapus !!') 
+    def get(self, request, id):
+        disiplin = disiplin.objects.filter(id=id)
+        if disiplin.exists():
+            disiplin.first().delete()
+            messages.add_message(request, messages.INFO, 'Data Berhasil Dihapus')                                       
+return redirect('disiplin:view')
+        else:
+messages.add_message(request, messages.INFO, 'Data Gagal Dihapus !!') 
