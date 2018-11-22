@@ -62,7 +62,7 @@ class Disiplin(models.Model):
     pelanggaran = models.IntegerField(default=0)
     pekerja = models.OneToOneField(Pekerja, 
                                 on_delete=models.CASCADE, 
-                                    related_name='Displins', blank=True, null=True)  
+                                    related_name='Disiplins', blank=True, null=True)  
 
     def __str__(self):
         return self.pekerja.nama
