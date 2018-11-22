@@ -20,6 +20,7 @@ PROJECT_APPS = [
     'management.petadua',
     'management.pko',
     'management.psikotes',
+    'management.hasil',
 ]
 
 REQUIRED_APPS = [
