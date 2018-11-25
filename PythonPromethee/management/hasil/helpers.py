@@ -3,7 +3,6 @@ import pandas as pd
 from orm.models import Pekerja,Pko, Disiplin, Kesehatan, Petadua, Psikotes
 import math
 
-
 pj = Pekerja.objects.all()
 
 def ListNilaiPekerja(pj):
@@ -18,7 +17,7 @@ def ListNilaiPekerja(pj):
         return df
     else:
         return[]
-
+    
 def ListNilaiPko(pj):
     if len(pj)>0:
         cols = ['nilai']
@@ -31,6 +30,7 @@ def ListNilaiPko(pj):
         return df
     else:
         return[]
+    
 def ListNilaiDisiplin(pj):
     if len(pj)>0:
         cols = ['nilai']
@@ -67,6 +67,7 @@ def ListNilaiPsikotes(pj):
         return df
     else:
         return[]
+    
 def ListNilaiPetadua(pj):
     if len(pj)>0:
         cols = ['nilai']
@@ -79,18 +80,15 @@ def ListNilaiPetadua(pj):
         return df
     else:
         return[]
-        
-def dataawal(pj):
-    df = pd.concat([ListNilaiPekerja(pj),ListNilaiPko(pj),ListNilaiDisiplin(pj),ListNilaiKesehatan(pj),ListNilaiPsikotes(pj),ListNilaiPetadua(pj)], axis=1)
-    df.columns=['Nama','Pko','Disiplin','Kesehatan','Psikotes','pt2']
+
+def gbdf(pj):
+    df = pd.concat([ListNilaiPko(pj),ListNilaiDisiplin(pj),ListNilaiKesehatan(pj),
+                ListNilaiPsikotes(pj),ListNilaiPetadua(pj)], axis=1)
+    df.columns=['Pko','Disiplin','Kesehatan','Psikotes','Peta Dua ']
     return df
 
-df = pd.concat([ListNilaiPko(pj),ListNilaiDisiplin(pj),ListNilaiKesehatan(pj),ListNilaiPsikotes(pj),ListNilaiPetadua(pj)], axis=1)
-df.columns=['Pko','Disiplin','Kesehatan','Psikotes','pt2']
-
-
-# Mencari nilai Preferensi (h(d))
 def prefhasil(pj):
+    df = gbdf(pj)
     p1 = len(df)
     p2 = len(df)
     p3 = len(df.loc[0])
@@ -115,11 +113,11 @@ def prefhasil(pj):
             hasil1.append(hasil2)
         arr.append(arr1)
         hasil.append(hasil1)
-        dff=pd.DataFrame(hasil)
-    return dff
-
-# Nilai Preferensi (h(d)=0)
+        dfhsl= pd.DataFrame(hasil)
+    return dfhsl
+    
 def prefarr(pj):
+    df=gbdf(pj)
     p1 = len(df)
     p2 = len(df)
     p3 = len(df.loc[0])
@@ -146,6 +144,62 @@ def prefarr(pj):
         hasil.append(hasil1)
     return arr
 
+# Mencari index prefensi
+def akhirn(pj):
+    hasil = prefhasil(pj)
+    arr = prefarr(pj)
+    akhir = []
+    for i in range(len(hasil)):
+        akhir1 = []
+        for j in range(len(arr[i])):
+            bla = sum(arr[i][j])/len(arr[i][j])
+            akhir1.append(bla)
+        akhir.append(akhir1)
+    return akhir
+
+# Hasil Akhir index prefensi
+def indexpref(pj):
+    akhir = akhirn(pj)
+    tmp = []
+    for i in range(len(akhir)):
+        tmp1 = []
+        for j in range(len(akhir[i])):
+            tmp1.append(akhir[j][i])
+        tmp.append(tmp1)
+    return tmp
+
+
+def lflow(pj):
+    lf=[]
+    akhir = akhirn(pj)
+    for i in range(len(akhir)):
+        jwb = 1/(len(akhir) - 1) * sum(akhir[i])
+        lf.append(jwb)
+    return lf
+def efl(pj):
+    tmp = indexpref(pj)
+    ef = []
+    for i in range(len(tmp)):
+        jwb = 1/(len(tmp) - 1) * sum(tmp[i])
+        ef.append(jwb)
+    return ef
+
+def nef(pj):
+    lf=lflow(pj)
+    ef=efl(pj)
+    nf = []    
+    for i in range(len(ef)):
+        jwb = lf[i]-ef[i]
+        nf.append(jwb)
+        nflow=pd.DataFrame(data=nf,columns=['net flow'])
+    return nflow
+
+def rangking(pj):
+    entrflow= pd.DataFrame(data=efl(pj),columns=['Entry Flow'])    
+    leavingflow= pd.DataFrame(data=lflow(pj),columns=['leaving flow'])        
+
+    rangking=pd.concat([leavingflow,entrflow,nef(pj)],axis=1)
+    return rangking
 
 # Nilai Preferensi F1 (PKO)
 def krtpko(pj):
@@ -159,6 +213,7 @@ def krtpko(pj):
     krpko = pd.DataFrame(kriteria1)
     return krpko
 
+                
 # Nilai Preferensi F2 (Disiplin)
 def krtdsp(pj):
     kriteria2 = [] 
@@ -168,7 +223,7 @@ def krtdsp(pj):
         for j in range(len(arr[i])):
             kriteria22.append(arr[i][j][1])
         kriteria2.append(kriteria22)
-    krdsp = pd.DataFrame(kriteria2)
+        krdsp = pd.DataFrame(kriteria2)
     return krdsp
     
 # Nilai Preferensi F3 (Kesehatan) 
@@ -180,7 +235,7 @@ def krtkes(pj):
         for j in range(len(arr[i])):
             kriteria33.append(arr[i][j][2])
         kriteria3.append(kriteria33)
-    krkes = pd.DataFrame(kriteria3)
+        krkes = pd.DataFrame(kriteria3)
     return krkes
 
 # Nilai Preferensi F4 (Psikotes) 
@@ -192,7 +247,7 @@ def krtpsk(pj):
         for j in range(len(arr[i])):
             kriteria44.append(arr[i][j][3])
         kriteria4.append(kriteria44)
-    krpsk = pd.DataFrame(kriteria4)
+        krpsk = pd.DataFrame(kriteria4)
     return krpsk
       
 # Nilai Preferensi F5 (Peta Dua) 
@@ -204,66 +259,5 @@ def krtpt2(pj):
         for j in range(len(arr[i])):
             kriteria55.append(arr[i][j][4])
         kriteria5.append(kriteria55)
-    krpt2 = pd.DataFrame(kriteria5)
+        krpt2 = pd.DataFrame(kriteria5)
     return krpt2
-
-# Mengihitung Index Preferensi 
-def akhirn(pj):
-    hasil = prefhasil(pj)
-    arr = prefarr(pj)
-    akhir = []
-    for i in range(len(hasil)):
-        akhir1 = []
-        for j in range(len(arr[i])):
-            bla = sum(arr[i][j])/len(arr[i][j])
-            akhir1.append(bla)
-        akhir.append(akhir1)
-    return akhir
-
-def indexpref(pj):
-    akhir = akhirn(pj)
-    tmp = []
-    for i in range(len(akhir)):
-        tmp1 = []
-        for j in range(len(akhir[i])):
-            tmp1.append(akhir[j][i])
-        tmp.append(tmp1)
-    return tmp
-
-# Menghitung nilai Leaving Flow
-def lflow(pj):
-    lf=[]
-    akhir = akhirn(pj)
-    for i in range(len(akhir)):
-        jwb = 1/(len(akhir) - 1) * sum(akhir[i])
-        lf.append(jwb)
-    return lf
-
-# Mengihitung nilai Entry Flow
-def efl(pj):
-    tmp = indexpref(pj)
-    ef = []
-    for i in range(len(tmp)):
-        jwb = 1/(len(tmp) - 1) * sum(tmp[i])
-        ef.append(jwb)
-    return ef
-
-# Menghitung nilai Net Flow 
-def nef(pj):
-    lf=lflow(pj)
-    ef=efl(pj)
-    nf = []    
-    for i in range(len(ef)):
-        jwb = lf[i]-ef[i]
-        nf.append(jwb)
-        nflow=pd.DataFrame(data=nf,columns=['net flow'])
-    return nflow
-
-# Membuat Data Frame dari Leaving FLow, Entry Flow, dan Net flow
-entrflow= pd.DataFrame(data=efl(pj),columns=['Entry Flow'])    
-leavingflow= pd.DataFrame(data=lflow(pj),columns=['leaving flow'])
-
-# Menggabungkan dataframe Leaving flow, Entry Flow, dan Net Flow menjadi satu Data Frame
-def rangking(pj):
-    rangking=pd.concat([ListNilaiPekerja(pj),entrflow,leavingflow,nef(pj)],axis=1)
-    return rangking 

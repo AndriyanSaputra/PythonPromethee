@@ -8,13 +8,11 @@ from django.template.loader import get_template
 
 # Create your views here.
 
-pj=Pekerja.objects.all()
 class ListDataAwalView(View):
     def get(self, request):
         template = 'hasil/dataawal.html'
-        nl = helpers.dataawal(pj).as_matrix()
         data = {
-            'dataawal' : nl,
+            'dataawal' : Pekerja.objects.all(),
             
         }
         return render(request, template, data)
@@ -22,6 +20,7 @@ class ListDataAwalView(View):
 class ListHasilView(View):
     def get(self, request):
         template = 'hasil/index.html'
+        pj=Pekerja.objects.all()
         nl = helpers.rangking(pj).as_matrix()
         data = {
             'hasil' : nl,
@@ -32,6 +31,7 @@ class ListHasilView(View):
 class ListPrefPkoView(View):
     def get(self, request):
         template = 'hasil/prefpko.html'
+        pj=Pekerja.objects.all()        
         nl = helpers.krtpko(pj).as_matrix()
         data = {
             'prefpko' : nl,
@@ -42,6 +42,7 @@ class ListPrefPkoView(View):
 class ListPrefDisiplinView(View):
     def get(self, request):
         template = 'hasil/prefdsp.html'
+        pj=Pekerja.objects.all()
         nl = helpers.krtdsp(pj).as_matrix()
         data = {
             'prefdsp' : nl,
@@ -53,6 +54,7 @@ class ListPrefDisiplinView(View):
 class ListPrefKesehatanView(View):
     def get(self, request):
         template = 'hasil/prefkes.html'
+        pj=Pekerja.objects.all()
         nl = helpers.krtkes(pj).as_matrix()
         data = {
             'prefkes' : nl,
@@ -64,6 +66,8 @@ class ListPrefKesehatanView(View):
 class ListPrefPsikotesView(View):
     def get(self, request):
         template = 'hasil/prefpsk.html'
+        pj=Pekerja.objects.all()
+
         nl = helpers.krtpsk(pj).as_matrix()
         data = {
             'prefpsk' : nl,
@@ -75,6 +79,8 @@ class ListPrefPsikotesView(View):
 class ListPrefPetaDuaView(View):
     def get(self, request):
         template = 'hasil/prefpt2.html'
+        pj=Pekerja.objects.all()
+
         nl = helpers.krtpt2(pj).as_matrix()
         data = {
             'prefpt2' : nl,

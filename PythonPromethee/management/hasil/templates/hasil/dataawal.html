@@ -36,15 +36,16 @@
       </tr>
     </thead>
     <tbody>
+    {% comment %} Pekerja {% endcomment %}
       {% for kl in dataawal %}
       <tr>
         <td>{{forloop.counter}}</td>
-        <td>{{kl.0}}</td>
-        <td>{{kl.1}}</td>
-        <td>{{kl.2}}</td>
-        <td>{{kl.3}}</td>
-        <td>{{kl.4}}</td>
-        <td>{{kl.5}}</td>
+        <td>{{kl.nama}}</td>
+        <td>{{kl.Pkos.nilai}}</td>
+        <td>{{kl.Disiplins.nilai}}</td>
+        <td>{{kl.Kesehatans.nilai}}</td>
+        <td>{{kl.Psikotess.nilai}}</td>
+        <td>{{kl.Petaduas.nilai}}</td>
        
     </tr>
     {% endfor %}
