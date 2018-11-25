@@ -166,7 +166,8 @@ def indexpref(pj):
         for j in range(len(akhir[i])):
             tmp1.append(akhir[j][i])
         tmp.append(tmp1)
-    return tmp
+    indpref= pd.DataFrame(data=tmp)
+    return indpref
 
 
 def lflow(pj):
@@ -198,7 +199,7 @@ def rangking(pj):
     entrflow= pd.DataFrame(data=efl(pj),columns=['Entry Flow'])    
     leavingflow= pd.DataFrame(data=lflow(pj),columns=['leaving flow'])        
 
-    rangking=pd.concat([leavingflow,entrflow,nef(pj)],axis=1)
+    rangking=pd.concat([ListNilaiPekerja(pj),leavingflow,entrflow,nef(pj)],axis=1)
     return rangking
 
 # Nilai Preferensi F1 (PKO)

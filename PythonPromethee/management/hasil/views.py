@@ -87,3 +87,16 @@ class ListPrefPetaDuaView(View):
             
         }
         return render(request, template, data)
+
+class ListIndexPreferensiView(View):
+    def get(self, request):
+        template = 'hasil/indpref.html'
+        pj=Pekerja.objects.all()
+
+        nl = helpers.indexpref(pj).as_matrix()
+        data = {
+            'indpref' : nl,
+            
+        }
+        return render(request, template, data)
+

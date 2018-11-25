@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^prefkes/$', views.ListPrefKesehatanView.as_view(), name='prefkes'),
     url(r'^prefpsk/$', views.ListPrefPsikotesView.as_view(), name='prefpsk'),
     url(r'^prefpt2/$', views.ListPrefPetaDuaView.as_view(), name='prefpt2'),
+    url(r'^indpref/$', views.ListIndexPreferensiView.as_view(), name='indpref'),
  
  
 ]

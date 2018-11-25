@@ -1,0 +1,179 @@
+{% extends 'layout/dashboard/index.html' %} {% block content %}
+<section class="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div id="contoh">
+        <ul class="nav nav-tabs">
+          <div class="content-wrapper">
+            <section class="content-header">
+              <div class="header text-center">
+                <h3 class="title">Data Histori Pekerja</h3>
+            </div>
+            <h1>
+                Data pekerja 
+                <small>Template</small>
+                <a class="btn btn-info pull-right" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus-square">  Tambah Data</i></a>
+            </h1>
+
+        </section>
+        <section class="content">
+          <div class="box">
+            <div class="box-body">
+              <div class="box-header">
+                <div class="">
+
+                  <table id="example1" class="table table-responsive table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Nama</th>
+                        <th>Pko</th>
+                        <th>Disiplin </th>
+                        <th>Kesehatan </th>
+                        <th>Psikotes </th>
+                        <th>Peta dua </th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for a in pekerja %}
+                  <tr>
+                    <td>{{a.nama}}</td>
+                    <td>{{a.Pkos.nilai}}</td>
+                    <td>{{a.Disiplins.nilai}}</td>
+                    <td>{{a.Kesehatans.nilai}}</td>
+                    <td>{{a.Psikotess.nilai}}</td>
+                    <td>{{a.Petaduas.nilai}}</td>
+
+
+                    <td >
+                      <a href="#" class="btn btn-info">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %} 
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title">Data Awal</h3>
+            </div>
+            <div class="modal-body">
+                <form  action="{% url 'datapekerja:save_data_pekerja'%}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="" class="control-label">Nomor Induk Pekerja</label>
+                              <input type="text" class="form-control" name="nip" value="" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="" class="control-label">Nama Perusahaan</label>
+                              <input type="text" class="form-control" name="nama_ptp" value="" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="" class="control-label">Nama Pekerja</label>
+                              <input type="text" class="form-control" name="nama" value="" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="" class="control-label">Tanggal Lahir</label>
+                              <input required type="text" id="date" class="form-control" name="tgl_lahir" value="" readonly>
+                          </div> 
+                          <div class="form-group">
+                              <label for="" class="control-label">Alamat</label>
+                              <textarea name="alamat" rows="3" class="form-control" required></textarea>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="form-group">
+                              <label for="" class="control-label">Jenis Kelamin</label>
+                              <br/>
+                              <input required type="radio" name="jenis_kelamin" value="Laki - Laki"> Laki - Laki &nbsp; &nbsp; &nbsp;
+                              <input required type="radio" name="jenis_kelamin" value="Perempuan"> Perempuan
+                          </div>
+                          <div class="form-group">
+                            <label for="" class="control-label">Agama</label>
+                            <input type="text" class="form-control" name="agama" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Status</label>
+                            <br/>
+                            <input required type="radio" name="status" value="Kawin"> Kawin &nbsp; &nbsp; &nbsp;
+                            <input required type="radio" name="status" value="Belum"> Belum Kawin
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Jabatan</label><br/>
+                            <input required type="radio" name="jabatan" value="ketua"> Ketua &nbsp;
+                            <input required type="radio" name="jabatan" value="sekjend"> Sekjen &nbsp;
+                            <input required type="radio" name="jabatan" value="pengurus"> Pengurus Harian
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Kehadiran</label>
+                            <input type="number" class="form-control" name="kehadiran" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Pelanggaran</label>
+                            <input type="number" class="form-control" name="pelanggaran" value="" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="" class="control-label">Kesehatan</label><br/>
+                            <input required type="radio" name="jabatan" value="sehat"> Sehat &nbsp;
+                            <input required type="radio" name="jabatan" value="tidak"> Tidak Sehat
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Intelegensi</label>
+                            <input type="number" class="form-control" name="intelegensi" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Kepribadian</label>
+                            <input type="number" class="form-control" name="kepribadian" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Teori</label>
+                            <input type="number" class="form-control" name="teori" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Praktik</label>
+                            <input type="number" class="form-control" name="praktik" value="" required>
+                        </div>
+                        <hr/>
+                        <div align="right">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+.modal-dialog{
+  width: 90%;
+  border-radius:10%;
+}
+</style>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example1').DataTable( {
+      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50,]]
+  } );
+} );
+</script>
+{% endblock %}
