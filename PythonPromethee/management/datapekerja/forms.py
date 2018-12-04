@@ -1,57 +1,57 @@
 from django import forms
 from orm.models import Pekerja,Pko,Disiplin,Kesehatan,Psikotes,Petadua
-from django.contrib.auth.models import User
-
 
 
 class PekerjaForm(forms.Form):
-    nip = forms.CharField( max_length=50, required=False)
-    nama_ptp = forms.CharField(max_length=30)
-    nama = forms.CharField( max_length=30, required=False)
-    tanggal_lahir= forms.DateField(
+    nip = forms.IntegerField(initial=0)
+    nama_ptp = forms.CharField(max_length=40)
+    nama =  forms.CharField( max_length=30)
+    tgl_lahir = forms.DateField(
         widget=forms.widgets.DateInput(format="%m/%d/%Y"))
+    alamat = forms.CharField(max_length=200)
     jenis_kelamin = forms.CharField(max_length=30)
-    alamat = forms.CharField(max_length=70)
-    agama = forms.CharField(max_length=80, required=False)
-    status = forms.CharField( max_length=40, required=False)
+    agama = forms.CharField(max_length=30)
+    status = forms.CharField(max_length=100)
 
     class Meta:
         model = Pekerja
 
 class PkoForm(forms.Form):
     jabatan = forms.CharField(max_length=50)
-    nilaipko = forms.IntegerField(initial=0)
-    
-    class Meta:
+    nilaipk = forms.IntegerField(initial=0)
+
+    class Meta: 
         model = Pko
 
 class DisiplinForm(forms.Form):
-    kehadiaran = forms.IntegerField(required=False)
-    pelanggaran = forms.IntegerField(required=False)
-    nilaidsp = forms.IntegerField(initial=0)
-    
+    kehadiran = forms.IntegerField(initial=0)
+    pelanggaran = forms.IntegerField(initial=0)
+    nilaidp = forms.IntegerField(initial=0)
+
+
     class Meta:
         model = Disiplin
 
 class KesehatanForm(forms.Form):
-    keterangan = forms.CharField(max_length=30)
-    nilaikes = forms.IntegerField(initial=0)
+    status_kes = forms.CharField(max_length=40)
+    nilaikh = forms.IntegerField(initial=0)
+
     
     class Meta:
         model = Kesehatan
 
 class PsikotesForm(forms.Form):
-    intelegensi  = forms.CharField(max_length=30)
-    kepribadian = forms.CharField(max_length=30, required=False)
+    intelegensi = forms.IntegerField(initial=0)
+    kepribadian = forms.IntegerField(initial=0)
     nilaipsk = forms.IntegerField(initial=0)
-    
-    class Meta:
+
+    class Meta: 
         model = Psikotes
 
 class PetaDuaForm(forms.Form):
-    teori  = forms.CharField(max_length=30)
-    praktek = forms.CharField(max_length=30, required=False)
+    teori = forms.IntegerField(initial=0)
+    praktek = forms.IntegerField(initial=0)
     nilaipt2 = forms.IntegerField(initial=0)
-    
-    class Meta:
+
+    class Meta: 
         model = Petadua

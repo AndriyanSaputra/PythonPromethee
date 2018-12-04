@@ -1,10 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
 import time
 import os
 
 class Pekerja(models.Model):
-    nip = models.IntegerField()
+    nip = models.IntegerField(default=0)
     nama_ptp = models.CharField(max_length=100, blank=True, null=True)
     nama = models.CharField(max_length=100, blank=True, null=True)
     tgl_lahir = models.DateField(auto_now=False, auto_now_add=False)
@@ -53,7 +52,7 @@ class Pko(models.Model):
         return self.pekerja.nama
 
     class Meta :
-        db_table = 'pko'
+        db_table = 'Pko'
         ordering = ['id']
 
 class Disiplin(models.Model):
@@ -79,7 +78,7 @@ class Kesehatan(models.Model):
         (TIDAK, 'Tidak Sehat'),
 
     )
-    status = models.CharField(
+    status_kes = models.CharField(
         max_length=2,
         choices=JS_CHOICES,
         default=SEHAT,
@@ -94,12 +93,12 @@ class Kesehatan(models.Model):
         return self.pekerja.nama
 
     class Meta :
-        db_table = 'jasmani'
+        db_table = 'Kesehatan'
         ordering = ['id']
 
 class Psikotes(models.Model):
-    intelegensi = models.CharField(max_length=100)
-    kepribadian = models.CharField(max_length=50)
+    intelegensi = models.IntegerField(default=0)
+    kepribadian = models.IntegerField(default=0)
     nilai = models.IntegerField(default=0)
     pekerja = models.OneToOneField(Pekerja, 
                                 on_delete=models.CASCADE, 
@@ -109,12 +108,12 @@ class Psikotes(models.Model):
         return self.pekerja.nama
 
     class Meta:
-        db_table = 'intelegensi'
+        db_table = 'Psikotes'
         ordering = ['id']
     
 class Petadua(models.Model):
-    teori = models.CharField(max_length=50)
-    praktek = models.CharField(max_length=50)
+    teori = models.IntegerField(default=0)
+    praktek = models.IntegerField(default=0)
     nilai = models.IntegerField(default=0)
     pekerja = models.OneToOneField(Pekerja, 
                                 on_delete=models.CASCADE, 
@@ -123,7 +122,7 @@ class Petadua(models.Model):
         return self.pekerja.nama
 
     class Meta :
-        db_table = 'teori'
+        db_table = 'Petadua'
         ordering = ['id']
     
 
