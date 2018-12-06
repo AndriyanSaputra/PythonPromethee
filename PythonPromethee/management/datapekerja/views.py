@@ -13,10 +13,10 @@ import os
 
 class ListDataPekerjaView(View):
     def get(self, request):
-        pekerja = Pekerja.objects.all()
+        pk = Pekerja.objects.all()
         template = 'datapekerja/index.html'
         data = {
-            'pekerja' : pekerja,
+            'pekerja' : pk,
         }
         return render(request, template, data)
 
@@ -40,26 +40,26 @@ class SaveDataPekerjaView(View):
             pekerja.alamat = pekerja_form.cleaned_data['alamat']
             pekerja.jenis_kelamin = pekerja_form.cleaned_data['jenis_kelamin']
             pekerja.agama = pekerja_form.cleaned_data['agama']
-            pekerja.status = pekerja_form.cleaned_data['sttus']
+            pekerja.status = pekerja_form.cleaned_data['status']
             pekerja.save()
 
             pko = Pko()
             pko.pekerja = pekerja
             pko.jabatan = pko_form.cleaned_data['jabatan']  
-            pko.nilai  = pko_form.cleaned_data['nilaipk']  
+            pko.nilai  = pko_form.cleaned_data['nilaipko']  
             pko.save()
 
             disiplin = Disiplin()
             disiplin.pekerja = pekerja
             disiplin.kehadiran = disiplin_form.cleaned_data['kehadiran']
             disiplin.pelanggaran = disiplin_form.cleaned_data['pelanggaran']
-            disiplin.nilai = disiplin_form.cleaned_data['nilaidp']
+            disiplin.nilai = disiplin_form.cleaned_data['nilaidsp']
             disiplin.save() 
 
             kesehatan = Kesehatan()
             kesehatan.pekerja = pekerja
             kesehatan.status_kes = kesehatan_form.cleaned_data['status_kes']      
-            kesehatan.nilai = kesehatan_form.cleaned_data['nilaikh']      
+            kesehatan.nilai = kesehatan_form.cleaned_data['nilaikes']      
             kesehatan.save()
 
             psikotes = Psikotes()

@@ -18,7 +18,7 @@ class PekerjaForm(forms.Form):
 
 class PkoForm(forms.Form):
     jabatan = forms.CharField(max_length=50)
-    nilaipk = forms.IntegerField(initial=0)
+    nilaipko = forms.IntegerField(initial=0)
 
     class Meta: 
         model = Pko
@@ -26,7 +26,7 @@ class PkoForm(forms.Form):
 class DisiplinForm(forms.Form):
     kehadiran = forms.IntegerField(initial=0)
     pelanggaran = forms.IntegerField(initial=0)
-    nilaidp = forms.IntegerField(initial=0)
+    nilaidsp = forms.IntegerField(initial=0)
 
 
     class Meta:
@@ -34,7 +34,7 @@ class DisiplinForm(forms.Form):
 
 class KesehatanForm(forms.Form):
     status_kes = forms.CharField(max_length=40)
-    nilaikh = forms.IntegerField(initial=0)
+    nilaikes = forms.IntegerField(initial=0)
 
     
     class Meta:
