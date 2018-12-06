@@ -166,8 +166,8 @@ def indexpref(pj):
         for j in range(len(akhir[i])):
             tmp1.append(akhir[j][i])
         tmp.append(tmp1)
-    indpref= pd.DataFrame(data=tmp)
-    return indpref
+    # indpref= pd.DataFrame(data=tmp)
+    return tmp
 
 
 def lflow(pj):

@@ -49,7 +49,7 @@
                       <a href="#" class="btn btn-info">
                         <i class="fa fa-eye"></i>
                     </a>
-                    <a href="#" class="btn btn-danger">
+                    <a href="{% url 'databuruh:hapus_data_buruh' id=a.id%}" class="btn btn-danger">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
@@ -73,25 +73,25 @@
                 <h3 class="modal-title">Data Awal</h3>
             </div>
             <div class="modal-body">
-                <form  action="{% url 'datapekerja:save_pekerja'%}" method="POST" enctype="multipart/form-data">
+                <form  action="{% url 'databuruh:save_buruh'%}" method="POST">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                               <label for="" class="control-label">Nomor Induk Pekerja</label>
-                              <input type="text" class="form-control" name="nip" value="" required>
+                              <input type="text" class="form-control" name="nip"  required>
                           </div>
                           <div class="form-group">
                               <label for="" class="control-label">Nama Perusahaan</label>
-                              <input type="text" class="form-control" name="nama_ptp" value="" required>
+                              <input type="text" class="form-control" name="nama_ptp"  required>
                           </div>
                           <div class="form-group">
                               <label for="" class="control-label">Nama Pekerja</label>
-                              <input type="text" class="form-control" name="nama" value="" required>
+                              <input type="text" class="form-control" name="nama"  required>
                           </div>
                           <div class="form-group">
                               <label for="" class="control-label">Tanggal Lahir</label>
-                              <input required type="text" id="date" class="form-control" name="tgl_lahir" value="" readonly>
+                              <input required type="text" id="date" class="form-control" name="tgl_lahir"  >
                           </div> 
                           <div class="form-group">
                               <label for="" class="control-label">Alamat</label>
@@ -102,19 +102,20 @@
                           <div class="form-group">
                               <label for="" class="control-label">Jenis Kelamin</label>
                               <br/>
-                              <input required type="radio" name="jenis_kelamin" value="PR"> Laki - Laki &nbsp; &nbsp; &nbsp;
-                              <input required type="radio" name="jenis_kelamin" value="WN"> Perempuan
+                              <input required type="radio" name="jenis_kelamin" value="Pria"> Laki - Laki &nbsp; &nbsp; &nbsp;
+                              <input required type="radio" name="jenis_kelamin" value="Wanita"> Perempuan
                           </div>
                           <div class="form-group">
                             <label for="" class="control-label">Agama</label>
-                            <input type="text" class="form-control" name="agama" value="" required>
+                            <input type="text" class="form-control" name="agama"  required>
                         </div>
                         <div class="form-group">
                             <label for="" class="control-label">Status</label>
                             <br/>
-                            <input required type="radio" name="status" value="KW"> Kawin &nbsp; &nbsp; &nbsp;
-                            <input required type="radio" name="status" value="BK"> Belum Kawin
+                            <input required type="radio" name="status" value="Kawin"> Kawin &nbsp; &nbsp; &nbsp;
+                            <input required type="radio" name="status" value="Belum Kawin"> Belum Kawin
                         </div>
+
                         <div class="form-group" onclick="jbtn()">
                             <label for="" class="control-label">Jabatan</label><br/>
                             <input required type="radio" name="jabatan" value="ketua"> Ketua &nbsp;
@@ -122,44 +123,59 @@
                             <input required type="radio" name="jabatan" value="pengurus"> Pengurus Harian
                         </div>
                         <div class="form-group">
+                            <label for="" class="control-label">nilai Pko</label><br/>
+                            <input type="text" class="form-control" id="pko" name="nilai"  required>
+                        </div>
+
+                        <div class="form-group">
                             <label for="" class="control-label">Kehadiran</label>
-                            <input type="number" class="form-control" name="kehadiran" value="" required id="kehadiran" onkeyup="dspl()">
+                            <input type="number" class="form-control" name="kehadiran"  required id="kehadiran" onkeyup="dspl()">
                         </div>
                         <div class="form-group">
                             <label for="" class="control-label">Pelanggaran</label>
-                            <input type="number" class="form-control" name="pelanggaran" value="" required id="pelanggaran" onkeyup="dspl()">
+                            <input type="number" class="form-control" name="pelanggaran"  required id="pelanggaran" onkeyup="dspl()">
+                        </div>
+                         <div class="form-group">
+                            <label for="" class="control-label">Nilai Disiplin</label> 
+                            <input type="text" class="form-control" id="dsp" name="nilaidp"  required>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group" onclick="kes()">
                             <label for="" class="control-label">Kesehatan</label><br/>
-                            <input required type="radio" name="kesehatan" value="SH"> Sehat &nbsp;
-                            <input required type="radio" name="kesehatan" value="TS"> Tidak Sehat
+                            <input required type="radio" name="kesehatan" value="Sehat"> Sehat &nbsp;
+                            <input required type="radio" name="kesehatan" value="Tidak Sehat"> Tidak Sehat
                         </div>
                         <div class="form-group">
+                            <label for="" class="control-label">nilai Kesehatan</label> 
+                            <input type="text" class="form-control" id="kes" name="nilaikh"  required>
+                        </div>
+
+                        <div class="form-group">
                             <label for="" class="control-label">Intelegensi</label>
-                            <input type="number" class="form-control" name="intelegensi" value="" required id="intelegensi" onkeyup="psi()">
+                            <input type="number" class="form-control" name="intelegensi"  required id="intelegensi" onkeyup="psi()">
                         </div>
                         <div class="form-group">
                             <label for="" class="control-label">Kepribadian</label>
-                            <input type="number" class="form-control" name="kepribadian" value="" required id="kepribadian" onkeyup="psi()">
+                            <input type="number" class="form-control" name="kepribadian"  required id="kepribadian" onkeyup="psi()">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Nilai Praktik</label>
+                            <input type="text" class="form-control" id="psk" name="nilaipsk"  required>
                         </div>
                         <div class="form-group">
                             <label for="" class="control-label">Teori</label>
-                            <input type="number" class="form-control" name="teori" value="" required id="teori" onkeyup="pet()">
+                            <input type="number" class="form-control" name="teori"  required id="teori" onkeyup="pet()">
                         </div>
                         <div class="form-group">
                             <label for="" class="control-label">Praktik</label>
-                            <input type="number" class="form-control" name="praktek" value="" required id="praktik" onkeyup="pet()">
+                            <input type="number" class="form-control" name="praktek"  required id="praktik" onkeyup="pet()">
                         </div>
                         <div class="form-group">
-                            <!-- <label for="" class="control-label">Praktik</label> -->
-                            <input type="text" class="form-control" id="pko" name="nilaipko" value="" required>
-                            <input type="text" class="form-control" id="dsp" name="nilaidsp" value="" required>
-                            <input type="text" class="form-control" id="kes" name="nilaikes" value="" required>
-                            <input type="text" class="form-control" id="psk" name="nilaipsk" value="" required>
-                            <input type="text" class="form-control" id="pt2" name="nilaipt2" value="" required>
+                            <label for="" class="control-label">Nilai Praktik</label>
+                            <input type="text" class="form-control" id="pt2" name="nilaipt2" required>
                         </div>
+
                         <hr/>
                         <div align="right">
                             <button type="submit" class="btn btn-primary">Save</button>
@@ -219,9 +235,9 @@
         var kes = document.getElementById('kes');
         var kess = document.querySelector('input[name="kesehatan"]:checked').value;
         if(kess == 'sehat'){
-            kes.value = 1;
-        }else{
             kes.value = 4;
+        }else{
+            kes.value = 1;
         }
     }
     function psi(){

@@ -17,26 +17,24 @@ class PekerjaForm(forms.Form):
         model = Pekerja
 
 class PkoForm(forms.Form):
-    jabatan = forms.CharField(max_length=50)
-    nilaipko = forms.IntegerField(initial=0)
+    jabatan = forms.CharField( max_length=30, required=False)
+    nilai = forms.IntegerField(initial=0)
 
-    class Meta: 
+    class Meta:
         model = Pko
 
 class DisiplinForm(forms.Form):
     kehadiran = forms.IntegerField(initial=0)
     pelanggaran = forms.IntegerField(initial=0)
-    nilaidsp = forms.IntegerField(initial=0)
-
+    nilaidp = forms.IntegerField(initial=0)
 
     class Meta:
         model = Disiplin
 
 class KesehatanForm(forms.Form):
-    status_kes = forms.CharField(max_length=40)
-    nilaikes = forms.IntegerField(initial=0)
+    status_kes =forms.CharField(max_length=30, required=False)
+    nilaikh = forms.IntegerField(initial=0)
 
-    
     class Meta:
         model = Kesehatan
 
@@ -45,13 +43,17 @@ class PsikotesForm(forms.Form):
     kepribadian = forms.IntegerField(initial=0)
     nilaipsk = forms.IntegerField(initial=0)
 
-    class Meta: 
+    class Meta:
         model = Psikotes
 
-class PetaDuaForm(forms.Form):
+class PetaduaForm(forms.Form):
     teori = forms.IntegerField(initial=0)
     praktek = forms.IntegerField(initial=0)
     nilaipt2 = forms.IntegerField(initial=0)
 
-    class Meta: 
+    class Meta:
         model = Petadua
+
+
+
+

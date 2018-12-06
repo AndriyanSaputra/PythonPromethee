@@ -4,39 +4,38 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from orm.models import Pekerja,Pko,Disiplin,Kesehatan,Psikotes,Petadua
-from management.datapekerja.forms import PekerjaForm,PkoForm,DisiplinForm,KesehatanForm,PsikotesForm,PetaDuaForm
+from management.databuruh.forms import PekerjaForm,PkoForm,DisiplinForm,KesehatanForm,PsikotesForm,PetaduaForm
 import mimetypes
 import os
 
 
 
-
-class ListDataPekerjaView(View):
+class ListDataBuruhView(View):
     def get(self, request):
         pk = Pekerja.objects.all()
-        template = 'datapekerja/index.html'
+        template = 'databuruh/index.html'
         data = {
             'pekerja' : pk,
         }
         return render(request, template, data)
 
-
-class SaveDataPekerjaView(View):
-    def post(self, request):        
-        pekerja_form = PekerjaForm(request.POST or None, request.FILES)
+class SaveDataBuruhView(View):
+    def post(self, request):
+        pekerja_form = PekerjaForm(request.POST or None)
         pko_form = PkoForm(request.POST or None)
         disiplin_form = DisiplinForm(request.POST or None)
         kesehatan_form = KesehatanForm(request.POST or None)
         psikotes_form = PsikotesForm(request.POST or None)
-        petadua_form = PetaDuaForm(request.POST or None)
+        petadua_form = PetaduaForm(request.POST or None)
+
 
         if pekerja_form.is_valid() and pko_form.is_valid() and disiplin_form.is_valid() and kesehatan_form.is_valid() and psikotes_form.is_valid() and petadua_form.is_valid():
-            
+
             pekerja = Pekerja()
-            pekerja.nip= pekerja_form.cleaned_data['nip']
+            pekerja.nip = pekerja_form.cleaned_data['nip']
             pekerja.nama_ptp = pekerja_form.cleaned_data['nama_ptp']
             pekerja.nama = pekerja_form.cleaned_data['nama']
-            pekerja.tgl_lahir= pekerja_form.cleaned_data['tgl_lahir']
+            pekerja.tgl_lahir = pekerja_form.cleaned_data['tgl_lahir']
             pekerja.alamat = pekerja_form.cleaned_data['alamat']
             pekerja.jenis_kelamin = pekerja_form.cleaned_data['jenis_kelamin']
             pekerja.agama = pekerja_form.cleaned_data['agama']
@@ -45,21 +44,21 @@ class SaveDataPekerjaView(View):
 
             pko = Pko()
             pko.pekerja = pekerja
-            pko.jabatan = pko_form.cleaned_data['jabatan']  
-            pko.nilai  = pko_form.cleaned_data['nilaipko']  
+            pko.jabatan = pko_form.cleaned_data['jabatan']
+            pko.nilai = pko_form.cleaned_data['nilai']
             pko.save()
 
             disiplin = Disiplin()
             disiplin.pekerja = pekerja
             disiplin.kehadiran = disiplin_form.cleaned_data['kehadiran']
             disiplin.pelanggaran = disiplin_form.cleaned_data['pelanggaran']
-            disiplin.nilai = disiplin_form.cleaned_data['nilaidsp']
+            disiplin.nilai = disiplin_form.cleaned_data['nilaidp']
             disiplin.save() 
 
             kesehatan = Kesehatan()
             kesehatan.pekerja = pekerja
-            kesehatan.status_kes = kesehatan_form.cleaned_data['status_kes']      
-            kesehatan.nilai = kesehatan_form.cleaned_data['nilaikes']      
+            kesehatan.status_kes = kesehatan_form.cleaned_data['status_kes']
+            kesehatan.nilai = kesehatan_form.cleaned_data['nilaikh']
             kesehatan.save()
 
             psikotes = Psikotes()
@@ -70,13 +69,24 @@ class SaveDataPekerjaView(View):
             psikotes.save()
 
             petadua = Petadua()
-            petadua.pekerja  = pekerja
-            petadua.teori = petadua_form.cleaned_data['teori']
+            petadua.pekerja = pekerja
             petadua.praktek = petadua_form.cleaned_data['praktek']
+            petadua.teori = petadua_form.cleaned_data['teori']
             petadua.nilai = petadua_form.cleaned_data['nilaipt2']
             petadua.save()
+
             messages.add_message(request, messages.INFO, 'Data Berhasil Disimpan')   
 
-            return redirect('datapekerja:view')
+            return redirect('databuruh:view')
         else:
-            return HttpResponse(pekerja_form.errors and DisiplinForm.errors and PkoForm.errors and kesehatan_form.errors and psikotes_form.errors and petadua_form.errors)
+            return HttpResponse(pekerja_form.errors and pko_form.errors and disiplin_form.errors and kesehatan_form.errors and psikotes_form.errors and petadua_form.errors)
+
+class HapusDataBuruhView(View):
+    def get(self, request, id):
+        pekerja = Pekerja.objects.filter(id=id)
+        if pekerja.exists():
+            pekerja.first().delete()
+            messages.add_message(request, messages.INFO, 'Data Berhasil Dihapus')                                       
+            return redirect('databuruh:view')
+        else:
+            messages.add_message(request, messages.INFO, 'Data Gagal Dihapus !!') 

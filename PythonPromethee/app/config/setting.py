@@ -21,7 +21,8 @@ PROJECT_APPS = [
     'management.pko',
     'management.psikotes',
     'management.hasil',
-    'management.datapekerja',
+    
+    'management.databuruh',
 ]
 
 REQUIRED_APPS = [

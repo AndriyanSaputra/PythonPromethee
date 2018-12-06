@@ -23,5 +23,5 @@ from app.config import setting
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^hasil/', include('management.hasil.urls', namespace='hasil')),
-    url(r'^datapekerja/', include('management.datapekerja.urls', namespace='datapekerja')),
+    url(r'^databuruh/', include('management.databuruh.urls', namespace='databuruh')),
 ]
