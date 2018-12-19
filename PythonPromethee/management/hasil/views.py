@@ -93,7 +93,7 @@ class ListIndexPreferensiView(View):
         template = 'hasil/indpref.html'
         pj=Pekerja.objects.all()
 
-        nl = helpers.indexpref(pj).as_matrix()
+        nl = helpers.dfindpref(pj).as_matrix()
         data = {
             'indpref' : nl,
             

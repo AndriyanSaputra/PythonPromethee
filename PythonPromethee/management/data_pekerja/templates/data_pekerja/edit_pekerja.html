@@ -1,81 +1,27 @@
-{% extends 'layout/dashboard/index.html' %} {% block content %}
-<section class="content">
-  <div class="row">
-    <div class="col-sm-12">
-      <div id="contoh">
-        <ul class="nav nav-tabs">
-          <div class="content-wrapper">
-            <section class="content-header">
-              <div class="header text-center">
-                <h3 class="title">Data Histori Pekerja</h3>
-            </div>
-            <h1>
-                Data pekerja 
-                <small>Template</small>
-                <a class="btn btn-info pull-right" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus-square">  Tambah Data</i></a>
-            </h1>
 
-        </section>
-        <section class="content">
-          <div class="box">
-            <div class="box-body">
-              <div class="box-header">
-                <div class="">
+{% extends 'layout/dashboard/index.html' %} 
+{% load widget_tweaks %}
+{% block content %}
 
-                  <table id="example1" class="table table-responsive table-striped table-hover">
-                    <thead>
-                      <tr>
-                        <th>Nama</th>
-                        <th>Pko</th>
-                        <th>Disiplin </th>
-                        <th>Kesehatan </th>
-                        <th>Psikotes </th>
-                        <th>Peta dua </th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  {% for a in pekerja %}
-                  <tr>
-                    <td>{{a.nama}}</td>
-                    <td>{{a.Pkos.nilai}}</td>
-                    <td>{{a.Disiplins.nilai}}</td>
-                    <td>{{a.Kesehatans.nilai}}</td>
-                    <td>{{a.Psikotess.nilai}}</td>
-                    <td>{{a.Petaduas.nilai}}</td>
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            Edit Data Pekerja
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">
+                    <i class="fa fa-dashboard"></i>Edit Data Pekerja </a>
+            </li>
+            <li class="active">{{siswa.nama}}</li>
+        </ol>
+    </section>
+<br>
+    <section class="content-header">
 
-
-                    <td >
-                      <a href="#" class="btn btn-info">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                    <a href="{% url 'databuruh:hapus_data_buruh' id=a.id%}" class="btn btn-danger">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %} 
-        </tbody>
-    </table>
-</div>
-</div>
-</div>
-</section>
-</div>
-</section>
-<div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h3 class="modal-title">Data Awal</h3>
-            </div>
-            <div class="modal-body">
-                <form  action="{% url 'databuruh:save_buruh'%}" method="POST">
-                    {% csrf_token %}
-                    <div class="row">
+ <div class="col-md-6">
+  <form action="{% url 'data_pekerja:updatebio' siswa.id %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
                         <div class="col-md-4">
                             <div class="form-group">
                               <label for="" class="control-label">Nomor Induk Pekerja</label>
@@ -171,30 +117,36 @@
                             <label for="" class="control-label">Praktik</label>
                             <input type="number" class="form-control" name="praktek"  required id="praktik" onkeyup="pet()">
                         </div>
-                        <div class="form-group">
+                        <div claseditbios="form-group">
                             <label for="" class="control-label">Nilai Praktik</label>
                             <input type="text" class="form-control" id="pt2" name="nilaipt2" required>
                         </div>
 
-                        <hr/>
-                        <div align="right">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                            <button type="submit" class="btn btn-primary">Cancel</button>
 
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+            <div class="form-group" hidden>
+                <label for="" class="control-label">Nilai Karakter</label>
+                <input type="text" class="form-control" id="id_nilaikr" name="nilaikr" value="{{siswa.karakters.nilai}}" required>
+            </div>
+
+           <div class="form-group">
+                <button type="submit" class="btn btn-success pull-right" style="margin-left: 8px;">Simpan</button>
+                
+            </div>  
+          
+          </form>
+      </div>
+      <!-- /.modal-content -->
+      
     </div>
+    <!-- /.modal-dialog -->
+    <div class="modal-footer">
+            {% comment %} <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button> {% endcomment %}
+        </div>
+  </div>
+    </section>
+
 </div>
-</div>
-<style>
-.modal-dialog{
-  width: 90%;
-  border-radius:10%;
-}
-</style>
 <script type="text/javascript">
     $('#date').datepicker();
     $(document).ready(function() {
@@ -271,5 +223,12 @@
         }
     }
 </script>
+
+{% if messages %} {% for message in messages %}
+<script>
+    toastr.success('{{message}}')
+</script>
+{% endfor %} {% endif %}
+
 
 {% endblock %}

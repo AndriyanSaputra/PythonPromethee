@@ -1,0 +1,311 @@
+{% extends 'layout/dashboard/index.html' %} {% block content %}
+<section class="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div id="contoh">
+        <ul class="nav nav-tabs">
+          <div class="content-wrapper">
+            <section class="content-header">
+              <div class="header text-center">
+                <h2 class="title">FEDERASI PERJUANGAN BURUH INDONESIA </h2  >
+                <h4 class= "title"> $ FPBI CABANG KOTA MATARAM $ </h4>
+            </div>
+            <h1>
+                Data pekerja 
+                <small>Template</small>
+                <a class="btn btn-info pull-right" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus-square">  Tambah Data</i></a>
+            </h1>
+
+        </section>
+        <section class="content">
+          <div class="box">
+            <div class="box-body">
+              <div class="box-header">
+                <div class="">
+
+                  <table id="example1" class="table table-responsive table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Nama</th>
+                        <th>Pko</th>
+                        <th>Disiplin </th>
+                        <th>Kesehatan </th>
+                        <th>Psikotes </th>
+                        <th>Peta dua </th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for a in pekerja %}
+                  <tr>
+                    <td>{{a.nama}}</td>
+                    <td>{{a.Pkos.nilai}}</td>
+                    <td>{{a.Disiplins.nilai}}</td>
+                    <td>{{a.Kesehatans.nilai}}</td>
+                    <td>{{a.Psikotess.nilai}}</td>
+                    <td>{{a.Petaduas.nilai}}</td>
+
+
+                    <td >
+                      <a href="{% url 'data_pekerja:detail_pekerja' a.id%}" class="btn btn-info">
+                        <i class="fa fa-eye"></i>
+                    </a>
+
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{a.id}}">
+                                    <i class="fa fa-trash"></i>
+                    </button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal{{a.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog modal-md modal-dialogs" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Konfirmasi Penghapusan</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Apakah anda yakin ingin menghapus Pekerja dengan nama <b>{{a.nama}}</b> dan id <b>{{a.id}}</b>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                    <a href="{% url 'data_pekerja:hapus_data_pekerja' id=a.id %}" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i> Hapus
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %} 
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title">Data Awal</h3>
+            </div>
+            <div class="modal-body">
+                <form  action="{% url 'data_pekerja:save_pekerja'%}" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="" class="control-label">Nomor Induk Pekerja</label>
+                              <input type="text" class="form-control" name="nip"  required>
+                          </div>
+                          <div class="form-group">
+                              <label for="" class="control-label">Nama Perusahaan</label>
+                              <input type="text" class="form-control" name="nama_ptp"  required>
+                          </div>
+                          <div class="form-group">
+                              <label for="" class="control-label">Nama Pekerja</label>
+                              <input type="text" class="form-control" name="nama"  required>
+                          </div>
+                          <div class="form-group">
+                              <label for="" class="control-label">Tanggal Lahir</label>
+                              <input required type="text" id="date" class="form-control" name="tgl_lahir"  >
+                          </div> 
+                          <div class="form-group">
+                              <label for="" class="control-label">Alamat</label>
+                              <textarea name="alamat" rows="3" class="form-control" required></textarea>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="form-group">
+                              <label for="" class="control-label">Jenis Kelamin</label>
+                              <br/>
+                              <input required type="radio" name="jenis_kelamin" value="Pria"> Laki - Laki &nbsp; &nbsp; &nbsp;
+                              <input required type="radio" name="jenis_kelamin" value="Wanita"> Perempuan
+                          </div>
+                          <div class="form-group">
+                            <label for="" class="control-label">Agama</label>
+                            <input type="text" class="form-control" name="agama"  required>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Status</label>
+                            <br/>
+                            <input required type="radio" name="status" value="Kawin"> Kawin &nbsp; &nbsp; &nbsp;
+                            <input required type="radio" name="status" value="Belum Kawin"> Belum Kawin
+                        </div>
+
+                        <div class="form-group" onclick="jbtn()">
+                            <label for="" class="control-label">Jabatan</label><br/>
+                            <input required type="radio" name="jabatan" value="ketua"> Ketua &nbsp;
+                            <input required type="radio" name="jabatan" value="sekjend"> Sekjen &nbsp;
+                            <input required type="radio" name="jabatan" value="pengurus"> Pengurus Harian
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">nilai Pko</label><br/>
+                            <input type="text" class="form-control" id="pko" name="nilai"  required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="control-label">Kehadiran</label>
+                            <input type="number" class="form-control" name="kehadiran"  required id="kehadiran" onkeyup="dspl()">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Pelanggaran</label>
+                            <input type="number" class="form-control" name="pelanggaran"  required id="pelanggaran" onkeyup="dspl()">
+                        </div>
+                         <div class="form-group">
+                            <label for="" class="control-label">Nilai Disiplin</label> 
+                            <input type="text" class="form-control" id="dsp" name="nilaidp"  required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group" onclick="kes()">
+                            <label for="" class="control-label">Kesehatan</label><br/>
+                            <input required type="radio" name="kesehatan" value="Sehat"> Sehat &nbsp;
+                            <input required type="radio" name="kesehatan" value="Tidak Sehat"> Tidak Sehat
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">nilai Kesehatan</label> 
+                            <input type="text" class="form-control" id="kes" name="nilaikh"  required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="control-label">Intelegensi</label>
+                            <input type="number" class="form-control" name="intelegensi"  required id="intelegensi" onkeyup="psi()">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Kepribadian</label>
+                            <input type="number" class="form-control" name="kepribadian"  required id="kepribadian" onkeyup="psi()">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Nilai Praktik</label>
+                            <input type="text" class="form-control" id="psk" name="nilaipsk"  required>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Teori</label>
+                            <input type="number" class="form-control" name="teori"  required id="teori" onkeyup="pet()">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Praktik</label>
+                            <input type="number" class="form-control" name="praktek"  required id="praktik" onkeyup="pet()">
+                        </div>
+                        <div claseditbios="form-group">
+                            <label for="" class="control-label">Nilai Praktik</label>
+                            <input type="text" class="form-control" id="pt2" name="nilaipt2" required>
+                        </div>
+
+                        <hr/>
+                        <div align="right">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary">Cancel</button>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+.modal-dialog{
+  width: 90%;
+  border-radius:10%;
+}
+.modal-dialogs{
+    width: 40%;
+}
+</style>
+<script type="text/javascript">
+    $('#date').datepicker();
+    $(document).ready(function() {
+        $('#example1').DataTable( {
+          "lengthMenu": [[5, 10, 25, 50, ], [5, 10, 25, 50,]]
+      } );
+    } );
+</script>
+<script >
+    // pkko = document.querySelector('input[name="jabatan"]:checked').value;
+    function jbtn(){
+        var pko = document.getElementById('pko');
+        let pkko = Array.from(document.getElementsByName("jabatan")).find(r => r.checked).value;
+        if (pkko == 'ketua'){
+            pko.value = 1;
+        }else if(pkko == 'sekjend'){
+            pko.value = 2;
+        }else{
+            pko.value = 4;
+        }
+    }
+    function dspl(){
+        var dsp = document.getElementById('dsp');
+        var hadir = document.getElementById('kehadiran');
+        var langgar = document.getElementById('pelanggaran');
+        var hasil = (parseInt(hadir.value) + parseInt(langgar.value))/2;
+        if(hasil > 90){
+            dsp.value = 1;
+        }else if(hasil > 80){
+            dsp.value = 2;
+        }else if(hasil > 70){
+            dsp.value = 3;
+        }else{
+            dsp.value = 4;
+        }
+    }
+    function kes(){
+        var kes = document.getElementById('kes');
+        
+    
+        let shtt = Array.from(document.getElementsByName("kesehatan")).find(r => r.checked).value;
+        if (shtt == 'Sehat'){
+            kes.value = 1;
+        }else if(shtt == 'Tidak Sehat'){
+            kes.value = 4;
+        }
+    }
+    function psi(){
+        var psk = document.getElementById('psk');
+        var intel = document.getElementById('intelegensi');
+        var kep = document.getElementById('kepribadian');
+        var hasil = (parseInt(intel.value) + parseInt(kep.value))/2;
+        if(hasil > 90){
+            psk.value = 1;
+        }else if(hasil > 80){
+            psk.value = 2;
+        }else if(hasil > 70){
+            psk.value = 3;
+        }else{
+            psk.value = 4;
+        }
+    }
+    function pet(){
+        var pt2 = document.getElementById('pt2');
+        var teo = document.getElementById('teori');
+        var prak = document.getElementById('praktik');
+        var hasil = (parseInt(teo.value) + parseInt(prak.value))/2;
+        if(hasil > 90){
+            pt2.value = 1;
+        }else if(hasil > 80){
+            pt2.value = 2;
+        }else if(hasil > 70){
+            pt2.value = 3;
+        }else{
+            pt2.value = 4;
+        }
+    }
+</script>
+
+{% if messages %} {% for message in messages %}
+<script>
+    toastr.success('{{message}}')
+</script>
+{% endfor %} {% endif %}
+
+
+{% endblock %}

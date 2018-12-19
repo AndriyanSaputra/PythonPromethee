@@ -168,7 +168,10 @@ def indexpref(pj):
         tmp.append(tmp1)
     # indpref= pd.DataFrame(data=tmp)
     return tmp
-
+    
+def dfindpref(pj):
+    indpref = pd.DataFrame(data=indexpref(pj))
+    return indpref
 
 def lflow(pj):
     lf=[]
