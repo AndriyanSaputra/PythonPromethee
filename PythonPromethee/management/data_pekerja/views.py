@@ -21,7 +21,7 @@ class ListDataPekerjaView(View):
 
 class SaveDataPekerjaView(View):
     def post(self, request):
-        pekerja_form = PekerjaForm(request.POST or None)
+        pekerja_form = PekerjaForm(request.POST or None, request.FILES)
         pko_form = PkoForm(request.POST or None)
         disiplin_form = DisiplinForm(request.POST or None)
         kesehatan_form = KesehatanForm(request.POST or None)
@@ -40,6 +40,7 @@ class SaveDataPekerjaView(View):
             pekerja.jenis_kelamin = pekerja_form.cleaned_data['jenis_kelamin']
             pekerja.agama = pekerja_form.cleaned_data['agama']
             pekerja.status = pekerja_form.cleaned_data['status']
+            pekerja.gambar = pekerja_form.cleaned_data['gambar']
             pekerja.save()
 
             pko = Pko()
@@ -138,6 +139,7 @@ class UpdateDataPekerjaView(View):
             pekerja.jenis_kelamin = pekerja_form.cleaned_data['jenis_kelamin']
             pekerja.agama = pekerja_form.cleaned_data['agama']
             pekerja.status = pekerja_form.cleaned_data['status']
+            pekerja.gambar = pekerja_form.cleaned_data['gambar']
             pekerja.save(force_update=True)
 
             pko = Pko()

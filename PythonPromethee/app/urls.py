@@ -25,3 +25,6 @@ urlpatterns = [
     url(r'^hasil/', include('management.hasil.urls', namespace='hasil')),
     url(r'^datapekerja/', include('management.data_pekerja.urls', namespace='data_pekerja')),
 ]
+
+urlpatterns +=  staticfiles_urlpatterns()
+urlpatterns += static(setting.MEDIA_URL, document_root=setting.MEDIA_ROOT)

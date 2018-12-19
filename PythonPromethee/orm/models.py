@@ -3,6 +3,7 @@ import time
 import os
 
 class Pekerja(models.Model):
+    
     nip = models.IntegerField(default=0)
     nama_ptp = models.CharField(max_length=100, blank=True, null=True)
     nama = models.CharField(max_length=100, blank=True, null=True)
@@ -33,6 +34,12 @@ class Pekerja(models.Model):
         choices=ST_CHOICES,
         default=KAWIN,
     )
+    gambar = models.ImageField(upload_to="pekerja",
+                             null=True,
+                             blank=True,
+                             help_text="Upload Foto Soal Anda"
+                             )
+
 
     def __str__(self):
         return self.nama

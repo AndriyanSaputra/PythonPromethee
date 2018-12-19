@@ -12,6 +12,7 @@ class PekerjaForm(forms.Form):
     jenis_kelamin = forms.CharField(max_length=30)
     agama = forms.CharField(max_length=30)
     status = forms.CharField(max_length=100)
+    gambar = forms.ImageField(required=False, initial="pekerja/icon.png")
 
     class Meta:
         model = Pekerja
