@@ -1,9 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 import time
 import os
 
 class Pekerja(models.Model):
-    
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     nip = models.IntegerField(default=0)
     nama_ptp = models.CharField(max_length=100, blank=True, null=True)
     nama = models.CharField(max_length=100, blank=True, null=True)
@@ -121,6 +122,20 @@ class Petadua(models.Model):
 
     class Meta :
         db_table = 'Petadua'
+        ordering = ['id']
+
+class Bobot(models.Model):
+    pko = models.IntegerField(default=0)
+    disiplin = models.IntegerField(default=0)
+    kesehatan = models.IntegerField(default=0)
+    psikotes = models.IntegerField(default=0)
+    petadua = models.IntegerField(default=0)
+
+    # def __str__(self):
+    #     return self
+
+    class Meta:
+        db_table = 'Bobot'
         ordering = ['id']
     
 

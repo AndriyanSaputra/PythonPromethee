@@ -1,152 +1,153 @@
-
 {% extends 'layout/dashboard/index.html' %} 
-{% load widget_tweaks %}
+{% comment %} {% load widget_tweaks %} {% endcomment %}
 {% block content %}
 
 <div class="content-wrapper">
-    <section class="content-header">
-        <h1>
-            Edit Data Pekerja
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <a href="#">
-                    <i class="fa fa-dashboard"></i>Edit Data Pekerja </a>
-            </li>
-            <li class="active">{{pekerja.nama}}</li>
-        </ol>
-    </section>
-<br>
-    <section class="content-header">
-
- <div class="col-md-6">
-  <form action="{% url 'data_pekerja:updatebio' siswa.id %}" method="POST" enctype="multipart/form-data">
-                                {% csrf_token %}
-                        <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="" class="control-label">Nomor Induk Pekerja</label>
-                              <input type="text" class="form-control" name="nip"  required>
-                          </div>
-                          <div class="form-group">
-                              <label for="" class="control-label">Nama Perusahaan</label>
-                              <input type="text" class="form-control" name="nama_ptp"  required>
-                          </div>
-                          <div class="form-group">
-                              <label for="" class="control-label">Nama Pekerja</label>
-                              <input type="text" class="form-control" name="nama"  required>
-                          </div>
-                          <div class="form-group">
-                              <label for="" class="control-label">Tanggal Lahir</label>
-                              <input required type="text" id="date" class="form-control" name="tgl_lahir"  >
-                          </div> 
-                          <div class="form-group">
-                              <label for="" class="control-label">Alamat</label>
-                              <textarea name="alamat" rows="3" class="form-control" required></textarea>
-                          </div>
-                      </div>
-                      <div class="col-md-4">
-                          <div class="form-group">
-                              <label for="" class="control-label">Jenis Kelamin</label>
-                              <br/>
-                              <input required type="radio" name="jenis_kelamin" value="Pria"> Laki - Laki &nbsp; &nbsp; &nbsp;
-                              <input required type="radio" name="jenis_kelamin" value="Wanita"> Perempuan
-                          </div>
-                          <div class="form-group">
-                            <label for="" class="control-label">Agama</label>
-                            <input type="text" class="form-control" name="agama"  required>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">Status</label>
-                            <br/>
-                            <input required type="radio" name="status" value="Kawin"> Kawin &nbsp; &nbsp; &nbsp;
-                            <input required type="radio" name="status" value="Belum Kawin"> Belum Kawin
-                        </div>
-
-                        <div class="form-group" onclick="jbtn()">
-                            <label for="" class="control-label">Jabatan</label><br/>
-                            <input required type="radio" name="jabatan" value="ketua"> Ketua &nbsp;
-                            <input required type="radio" name="jabatan" value="sekjend"> Sekjen &nbsp;
-                            <input required type="radio" name="jabatan" value="pengurus"> Pengurus Harian
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">nilai Pko</label><br/>
-                            <input type="text" class="form-control" id="pko" name="nilai"  required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="control-label">Kehadiran</label>
-                            <input type="number" class="form-control" name="kehadiran"  required id="kehadiran" onkeyup="dspl()">
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">Pelanggaran</label>
-                            <input type="number" class="form-control" name="pelanggaran"  required id="pelanggaran" onkeyup="dspl()">
-                        </div>
-                         <div class="form-group">
-                            <label for="" class="control-label">Nilai Disiplin</label> 
-                            <input type="text" class="form-control" id="dsp" name="nilaidp"  required>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group" onclick="kes()">
-                            <label for="" class="control-label">Kesehatan</label><br/>
-                            <input required type="radio" name="kesehatan" value="Sehat"> Sehat &nbsp;
-                            <input required type="radio" name="kesehatan" value="Tidak Sehat"> Tidak Sehat
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">nilai Kesehatan</label> 
-                            <input type="text" class="form-control" id="kes" name="nilaikh"  required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="control-label">Intelegensi</label>
-                            <input type="number" class="form-control" name="intelegensi"  required id="intelegensi" onkeyup="psi()">
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">Kepribadian</label>
-                            <input type="number" class="form-control" name="kepribadian"  required id="kepribadian" onkeyup="psi()">
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">Nilai Praktik</label>
-                            <input type="text" class="form-control" id="psk" name="nilaipsk"  required>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">Teori</label>
-                            <input type="number" class="form-control" name="teori"  required id="teori" onkeyup="pet()">
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">Praktik</label>
-                            <input type="number" class="form-control" name="praktek"  required id="praktik" onkeyup="pet()">
-                        </div>
-                        <div claseditbios="form-group">
-                            <label for="" class="control-label">Nilai Praktik</label>
-                            <input type="text" class="form-control" id="pt2" name="nilaipt2" required>
-                        </div>
-
-
-            <div class="form-group" hidden>
-                <label for="" class="control-label">Nilai Karakter</label>
-                <input type="text" class="form-control" id="id_nilaikr" name="nilaikr" value="{{siswa.karakters.nilai}}" required>
-            </div>
-
-           <div class="form-group">
-                <button type="submit" class="btn btn-success pull-right" style="margin-left: 8px;">Simpan</button>
-                
-            </div>  
-          
-          </form>
-      </div>
-      <!-- /.modal-content -->
-      
+  <section class="content-header">
+    <h1>
+      Edit Data Pekerja Organisasi 
+    </h1>
+    <ol class="breadcrumb">
+      <li class="active">{{pekerja.nama}}</li>
+    </ol>
+  </section>
+  <br>
+  <section class="content-header"></section>
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title"> Data Pekerja</h3>
     </div>
-    <!-- /.modal-dialog -->
-    <div class="modal-footer">
-            {% comment %} <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save</button> {% endcomment %}
+    <!-- <div class="container"> -->
+      <div class="box-body">
+        <form action="{% url 'data_pekerja:update_pekerja' pekerja.id %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input name="user" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Username" type="email">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input name = "password" class="form-control" id="exampleInputPassword1" placeholder="Masukkan Password" type="password">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">NIP</label>
+                <input name = "nip" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nip" >
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Nama Perusahaan</label>
+                <input name = "nama_ptp" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama PTP" >
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Nama Pekerja</label>
+                <input name = "nama" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Pekerja" >
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">Tanggal Lahir</label>
+                <input required type="text" id="date" class="form-control" name="tanggal_lahir" value="{{pekerja.tanggal_lahir}}" readonly>
+                {% comment %} {{form.tanggal_lahir | add_class:"form-control" |append_attr:"placeholder:Input Register Number" |append_attr:"id:date" |append_attr:"readonly"}} {% endcomment %}
+              </div> 
+              <div class="form-group">
+                <label for="exampleInputEmail1">Alamat</label>
+                <textarea name = "alamat" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Alamat Anda" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">Jenis Kelamin</label>
+              </div>
+              <div class="form-group">
+                <input required type="radio" name="jenis_kelamin" value="Laki - Laki" {% if pekerja.jenis_kelamin == 'Laki - Laki' %} checked {% endif %}>Laki - Laki &nbsp; &nbsp; &nbsp;
+                <input required type="radio" name="jenis_kelamin" value="Perempuan" {% if pekerja.jenis_kelamin == 'Perempuan' %} checked {% endif %}> Perempuan
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Agama</label>
+                <input name = "agama" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Agama" >
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">Status</label>
+              </div>
+              <div class="form-group">
+                <input required type="radio" name="status" value="Kawin" {% if pekerja.status == 'Kawin' %} checked {% endif %}>Kawin &nbsp; &nbsp; &nbsp;
+                <input required type="radio" name="status" value="Belum Kawin" {% if pekerja.status == 'Belum Kawin' %} checked {% endif %}> Belum Kawin
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group" onclick="jbtn()">
+                <label for="" class="control-label">Jabatan</label><br/>
+                <input required type="radio" name="jabatan" value="ketua"> Ketua &nbsp;
+                <input required type="radio" name="jabatan" value="sekjend"> Sekjen &nbsp;
+                <input required type="radio" name="jabatan" value="pengurus"> Pengurus Harian
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">Nilai PKO</label><br/>
+                <input type="text" class="form-control" id="pko" name="nilai"  required>
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">Kehadiran</label>
+                <input type="number" class="form-control" name="kehadiran"  required id="kehadiran" onkeyup="dspl()">
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">Pelanggaran</label>
+                <input type="number" class="form-control" name="pelanggaran"  required id="pelanggaran" onkeyup="dspl()">
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">Nilai Disiplin</label> 
+                <input type="text" class="form-control" id="dsp" name="nilaidp"  required>
+              </div>
+              <div class="form-group" onclick="kes()">
+                <label for="" class="control-label">Kesehatan</label><br/>
+                <input required type="radio" name="status_kes" value="Sehat"> Sehat &nbsp;
+                <input required type="radio" name="status_kes" value="Tidak Sehat"> Tidak Sehat
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">Nilai Kesehatan</label> 
+                <input type="text" class="form-control" id="kes" name="nilaikh"  required>
+              </div>
+              <div class="form-group">
+               <label for="" class="control-label">Intelegensi</label>
+               <input type="number" class="form-control" name="intelegensi"  required id="intelegensi" onkeyup="psi()">
+             </div>
+             <div class="form-group">
+               <label for="" class="control-label">Kepribadian</label>
+               <input type="number" class="form-control" name="kepribadian"  required id="kepribadian" onkeyup="psi()">
+             </div>
+             <div class="form-group">
+              <label for="" class="control-label">Nilai Psikotes</label> 
+              <input type="text" class="form-control" id="psk" name="nilaipsk"  required>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+           <div class="form-group">
+            <label for="" class="control-label">Teori</label>
+            <input type="number" class="form-control" name="teori"  required id="teori" onkeyup="pet()">
+          </div>
+          <div class="form-group">
+            <label for="" class="control-label">Praktik</label>
+            <input type="number" class="form-control" name="praktek"  required id="praktik" onkeyup="pet()">
+          </div>
+          <div claseditbios="form-group">
+            <label for="" class="control-label">Nilai Pendidika Tahap Dua</label>
+            <input type="text" class="form-control" id="pt2" name="nilaipt2" required>
+          </div>
+          <br/>
+          <div class="form-group">
+            <label for="exampleInputFile">Enter Input Picture</label>
+            <input name= "gambar" id="exampleInputFile" type="file">
+            <p class="help-block">Example block-level help text here.</p>
+          </div>
         </div>
-  </div>
-    </section>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-success pull-right" style="margin-left: 8px;">Simpan</button>
+      </div>
+    </form>
+  <!-- </div> -->
 
 </div>
+</div>
+</div>
+
 <script type="text/javascript">
     $('#date').datepicker();
     $(document).ready(function() {
@@ -185,11 +186,11 @@
     }
     function kes(){
         var kes = document.getElementById('kes');
-        var kess = document.querySelector('input[name="kesehatan"]:checked').value;
-        if(kess == 'sehat'){
-            kes.value = 4;
-        }else{
+        let shtt = Array.from(document.getElementsByName("status_kes")).find(r => r.checked).value;
+        if (shtt == 'Sehat'){
             kes.value = 1;
+        }else if(shtt == 'Tidak Sehat'){
+            kes.value = 4;
         }
     }
     function psi(){
@@ -224,11 +225,32 @@
     }
 </script>
 
-{% if messages %} {% for message in messages %}
+
 <script>
     toastr.success('{{message}}')
+
+ function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#picture').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#fileInput").change(function () {
+        readURL(this);
+    });         
 </script>
-{% endfor %} {% endif %}
-
-
-{% endblock %}
+{% if messages %}
+{% for message in messages %}
+<script>
+  toastr.success('{{message}}')
+</script>
+{% endfor %}
+{% endif %}
+{% endblock%}

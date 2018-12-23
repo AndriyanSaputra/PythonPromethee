@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from orm.models import Pekerja,Pko,Disiplin,Kesehatan,Psikotes,Petadua
 from management.data_pekerja.forms import PekerjaForm,PkoForm,DisiplinForm,KesehatanForm,PsikotesForm,PetaduaForm
+from django.contrib.auth.models import User 
 import mimetypes
 import os
 
@@ -30,8 +31,20 @@ class SaveDataPekerjaView(View):
 
 
         if pekerja_form.is_valid() and pko_form.is_valid() and disiplin_form.is_valid() and kesehatan_form.is_valid() and psikotes_form.is_valid() and petadua_form.is_valid():
+            
+            user = User()
+            user.username = request.POST['username']
+            user.set_password(request.POST['password'])
+            staff = request.POST.get('staff', None)
+            if not staff == None:
+                user.is_staff = True
+                user.save()
+
+            else:
+                user.save()
 
             pekerja = Pekerja()
+            pekerja.user = user
             pekerja.nip = pekerja_form.cleaned_data['nip']
             pekerja.nama_ptp = pekerja_form.cleaned_data['nama_ptp']
             pekerja.nama = pekerja_form.cleaned_data['nama']
@@ -93,28 +106,6 @@ class HapusDataPekerjaView(View):
         else:
             messages.add_message(request, messages.INFO, 'Data Gagal Dihapus !!') 
 
-class UbahDataPekerjaView(View):
-    def get(self, request, id):
-        tgl = Pekerja.objects.filter(id=id)
-        if not tgl.exists():
-            return redirect('data_pekerja:view')
-        sw = tgl.first()
-        initial = {
-
-            'id': sw.id,
-            # 'nama': siswa.nama,
-            # 'jenis_kelamin': siswa.jenis_kelamin,
-            'tanggal_lahir': sw.tanggal_lahir,
-            # 'user': siswa.user,
-        }
-
-        form = PekerjaForm(initial=initial)
-        template = 'data_pekerja/index.html'
-        data = {
-            'form': form,
-            'pekerja': Pekerja.objects.get(id=id),
-        }
-        return render(request, template, data)
 
 class UpdateDataPekerjaView(View):
     def post(self, request, id):
@@ -191,24 +182,9 @@ class DetailDataPekerjaView(View):
 
 class UbahPekerjaView(View):
     def get(self, request, id):
-        tgl = Pekerja.objects.filter(id=id)
-        if not tgl.exists():
-            return redirect('data_pekerja:view')
-        sw = tgl.first()
-        initial = {
-
-            'id': sw.id,
-            # 'nama': siswa.nama,
-            # 'jenis_kelamin': siswa.jenis_kelamin,
-            'tanggal_lahir': sw.tanggal_lahir,
-            # 'user': siswa.user,
-        }
-
-        form = PekerjaForm(initial=initial)
         template = 'data_pekerja/edit_pekerja.html'
         data = {
-            'form': form,
-            'siswa': Pekerja.objects.get(id=id),
+            'pekerja': Pekerja.objects.get(id=id),
         }
         return render(request, template, data)
 
