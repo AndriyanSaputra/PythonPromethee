@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from orm.models import Pekerja,Pko,Disiplin,Kesehatan,Psikotes,Petadua
-from management.data_pekerja.forms import PekerjaForm,PkoForm,DisiplinForm,KesehatanForm,PsikotesForm,PetaduaForm
+from management.data_pekerja.forms import PekerjaForm,PkoForm,DisiplinForm,KesehatanForm,PsikotesForm,PetaduaForm,UserForm
 from django.contrib.auth.models import User 
 import mimetypes
 import os
@@ -110,18 +110,24 @@ class HapusDataPekerjaView(View):
 class UpdateDataPekerjaView(View):
     def post(self, request, id):
         pekerja = Pekerja.objects.get(id=id)
-
         pekerja_form = PekerjaForm(request.POST or None, request.FILES)
         pko_form = PkoForm(request.POST or None)
         disiplin_form = DisiplinForm(request.POST or None)
         kesehatan_form = KesehatanForm(request.POST or None)
         psikotes_form = PsikotesForm(request.POST or None)
         petadua_form = PetaduaForm(request.POST or None)
-        # user_form = UserForm(request.POST, request.FILES)
+        user_form = UserForm(request.POST or None)
 
         if pekerja_form.is_valid() and pko_form.is_valid() and disiplin_form.is_valid() and kesehatan_form.is_valid() and psikotes_form.is_valid() and petadua_form.is_valid():
-            
-            pekerja = Pekerja()
+
+            if user_form.is_valid():
+                user = pekerja.user
+                user.username = user_form.cleaned_data['user']
+                user.set_password(user_form.cleaned_data['password']) 
+                user.save(force_update=True)
+                # pekerja.user = user
+
+            pekerja.user = user
             pekerja.nip = pekerja_form.cleaned_data['nip']
             pekerja.nama_ptp = pekerja_form.cleaned_data['nama_ptp']
             pekerja.nama = pekerja_form.cleaned_data['nama']
@@ -133,44 +139,38 @@ class UpdateDataPekerjaView(View):
             pekerja.gambar = pekerja_form.cleaned_data['gambar']
             pekerja.save(force_update=True)
 
-            pko = Pko()
-            pko.pekerja = pekerja
-            pko.jabatan = pko_form.cleaned_data['jabatan']
-            pko.nilai = pko_form.cleaned_data['nilai']
-            pko.save(force_update=True)
+            pekerja.Pkos.pekerja = pekerja
+            pekerja.Pkos.jabatan = pko_form.cleaned_data['jabatan']
+            pekerja.Pkos.nilai = pko_form.cleaned_data['nilai']
+            pekerja.Pkos.save(force_update=True)
 
-            disiplin = Disiplin()
-            disiplin.pekerja = pekerja
-            disiplin.kehadiran = disiplin_form.cleaned_data['kehadiran']
-            disiplin.pelanggaran = disiplin_form.cleaned_data['pelanggaran']
-            disiplin.nilai = disiplin_form.cleaned_data['nilaidp']
-            disiplin.save(force_update=True) 
+            pekerja.Disiplins.pekerja = pekerja
+            pekerja.Disiplins.kehadiran = disiplin_form.cleaned_data['kehadiran']
+            pekerja.Disiplins.pelanggaran = disiplin_form.cleaned_data['pelanggaran']
+            pekerja.Disiplins.nilai = disiplin_form.cleaned_data['nilaidp']
+            pekerja.Disiplins.save(force_update=True) 
 
-            kesehatan = Kesehatan()
-            kesehatan.pekerja = pekerja
-            kesehatan.status_kes = kesehatan_form.cleaned_data['status_kes']
-            kesehatan.nilai = kesehatan_form.cleaned_data['nilaikh']
-            kesehatan.save(force_update=True)
+            pekerja.Kesehatans.pekerja = pekerja
+            pekerja.Kesehatans.status_kes = kesehatan_form.cleaned_data['status_kes']
+            pekerja.Kesehatans.nilai = kesehatan_form.cleaned_data['nilaikh']
+            pekerja.Kesehatans.save(force_update=True)
 
-            psikotes = Psikotes()
-            psikotes.pekerja = pekerja
-            psikotes.intelegensi = psikotes_form.cleaned_data['intelegensi']
-            psikotes.kepribadian = psikotes_form.cleaned_data['kepribadian']
-            psikotes.nilai = psikotes_form.cleaned_data['nilaipsk']
-            psikotes.save(force_update=True)
+            pekerja.Psikotess.pekerja = pekerja
+            pekerja.Psikotess.intelegensi = psikotes_form.cleaned_data['intelegensi']
+            pekerja.Psikotess.kepribadian = psikotes_form.cleaned_data['kepribadian']
+            pekerja.Psikotess.nilai = psikotes_form.cleaned_data['nilaipsk']
+            pekerja.Psikotess.save(force_update=True)
 
-            petadua = Petadua()
-            petadua.pekerja = pekerja
-            petadua.praktek = petadua_form.cleaned_data['praktek']
-            petadua.teori = petadua_form.cleaned_data['teori']
-            petadua.nilai = petadua_form.cleaned_data['nilaipt2']
-            petadua.save(force_update=True)
+            pekerja.Petaduas.pekerja = pekerja
+            pekerja.Petaduas.teori = petadua_form.cleaned_data['teori']
+            pekerja.Petaduas.praktek = petadua_form.cleaned_data['praktek']
+            pekerja.Petaduas.nilai = petadua_form.cleaned_data['nilaipt2']
+            pekerja.Petaduas.save(force_update=True)
             messages.add_message(request, messages.INFO, 'Data Berhasil Diupdate')  
 
             return redirect('data_pekerja:view')
         else:
-            return HttpResponse(pekerja_form.errors)
-
+            return HttpResponse(pekerja_form.errors and pko_form.errors and disiplin_form.errors and kesehatan_form.errors and psikotes_form.errors and petadua_form.errors)
 
 class DetailDataPekerjaView(View):
     def get(self, request, id):
