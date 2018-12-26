@@ -19,11 +19,15 @@ from django.conf.urls import url, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from app.config import setting
+from login import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('login.urls', namespace='login')),
+    # url(r'^pekerja/', include('pekerja.urls', namespace='pekerja')),
     url(r'^hasil/', include('management.hasil.urls', namespace='hasil')),
     url(r'^datapekerja/', include('management.data_pekerja.urls', namespace='data_pekerja')),
+    url(r'^bobot/', include('management.bobot.urls', namespace='bobot')),
 ]
 
 urlpatterns +=  staticfiles_urlpatterns()

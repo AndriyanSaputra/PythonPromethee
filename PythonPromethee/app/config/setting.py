@@ -22,6 +22,9 @@ PROJECT_APPS = [
     'management.psikotes',
     'management.hasil',
     'management.data_pekerja',
+    'login',
+    'helper',
+    'management.bobot',
 ]
 
 REQUIRED_APPS = [

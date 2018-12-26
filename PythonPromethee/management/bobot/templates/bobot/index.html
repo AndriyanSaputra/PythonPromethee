@@ -1,0 +1,87 @@
+{% extends 'layout/dashboard/index.html' %}
+
+{% block content %}
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Bobot
+      <small>Template</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i>Bobot</a></li>
+      <li class="active">Template</li>
+
+    </ol>
+  </section>
+  <section class="content">
+
+    <div class="row">
+      <div class="col-sm-4">
+        
+
+      </div>
+
+      <div class="col-sm-8">
+        <div class="box">
+          <div class="box-body">
+            <div class="box-header">
+              <h3 class="box-title">Bobot Kriteria </h3>&nbsp;
+            </div>
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <!-- <th>No</th> -->
+
+                  <th>ID</th>
+                  <th>Pko</th>
+                  <th>Disiplin</th>
+                  <th>Kesehatan</th>
+                  <th>Psikotes</th>
+                  <th>Peta Dua</th>
+                </tr>
+              </thead>
+              <tbody>
+             
+                <tr>
+                  <td>80 %</td>
+                  <td>70 %</td>
+                  <td>80 %</td>
+                  <td>90 %</td>
+                  <td>90 %</td>
+                  <td>90 %</td>
+                  <td>
+
+                    <a href="" class="btn btn-warning">
+                      <i class="fa fa-edit"></i>
+                    </a>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+</script>
+</div>
+</div>
+
+</section>  
+</div>
+{% if messages %} {% for message in messages %}
+<script>
+  toastr.success('{{message}}')
+</script>
+{% endfor %} {% endif %}
+
+<script type="text/javascript">
+  $('#example1').DataTable();
+</script>
+{% endblock %}
