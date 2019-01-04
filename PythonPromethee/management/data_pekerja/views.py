@@ -136,9 +136,13 @@ class UpdateDataPekerjaView(View):
             pekerja.jenis_kelamin = pekerja_form.cleaned_data['jenis_kelamin']
             pekerja.agama = pekerja_form.cleaned_data['agama']
             pekerja.status = pekerja_form.cleaned_data['status']
-            pekerja.gambar = pekerja_form.cleaned_data['gambar']
-            pekerja.save(force_update=True)
+            newpic = pekerja_form.cleaned_data.get('gambar', None)
 
+            if not newpic == None:
+                    pekerja.gambar = newpic
+                    
+            pekerja.save(force_update=True)
+            
             pekerja.Pkos.pekerja = pekerja
             pekerja.Pkos.jabatan = pko_form.cleaned_data['jabatan']
             pekerja.Pkos.nilai = pko_form.cleaned_data['nilai']
@@ -168,6 +172,7 @@ class UpdateDataPekerjaView(View):
             pekerja.Petaduas.save(force_update=True)
             messages.add_message(request, messages.INFO, 'Data Berhasil Diupdate')  
 
+
             return redirect('data_pekerja:view')
         else:
             return HttpResponse(pekerja_form.errors and pko_form.errors and disiplin_form.errors and kesehatan_form.errors and psikotes_form.errors and petadua_form.errors)
@@ -187,4 +192,5 @@ class UbahPekerjaView(View):
             'pekerja': Pekerja.objects.get(id=id),
         }
         return render(request, template, data)
+
 

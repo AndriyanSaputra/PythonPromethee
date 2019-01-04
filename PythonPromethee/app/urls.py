@@ -27,7 +27,8 @@ urlpatterns = [
     # url(r'^pekerja/', include('pekerja.urls', namespace='pekerja')),
     url(r'^hasil/', include('management.hasil.urls', namespace='hasil')),
     url(r'^datapekerja/', include('management.data_pekerja.urls', namespace='data_pekerja')),
-    url(r'^bobot/', include('management.bobot.urls', namespace='bobot')),
+    url(r'^datapemilih/', include('management.data_pemilih.urls', namespace='data_pemilih')),
+    # url(r'^bobot/', include('management.bobot.urls', namespace='bobot')),
 ]
 
 urlpatterns +=  staticfiles_urlpatterns()

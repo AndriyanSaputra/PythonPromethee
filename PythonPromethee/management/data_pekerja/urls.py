@@ -4,6 +4,7 @@ from management.data_pekerja import views
 
 urlpatterns = [
     url (r'^$', views.ListDataPekerjaView.as_view(), name='view'),
+    
     url (r'^save_pekerja$', views.SaveDataPekerjaView.as_view(), name='save_pekerja'),
     url (r'^hapus_data_pekerja/(?P<id>\d+)$', views.HapusDataPekerjaView.as_view(), name='hapus_data_pekerja'),
     url (r'^detail_pekerja/(?P<id>\d+)$', views.DetailDataPekerjaView.as_view(), name='detail_pekerja'),

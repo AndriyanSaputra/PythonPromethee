@@ -16,13 +16,28 @@
          <li class="treeview active menu-open">
           <a href="#">
             <i class="fa fa-database"></i>
-            <span>Data Pemilihan Umum</span>
+            <span>Data Awal</span> 
           </a>
           <ul class="treeview-menu">    
-            <li><a href="{% url 'data_pekerja:view' %}"><i class="fa fa-circle-o"></i>Data Pekerja</a></li>  
-            <li><a href="{% url 'bobot:view' %}"><i class="fa fa-circle-o"></i>Bobot</a></li>
+           <!--  <li><a href="{% url 'data_pekerja:view' %}"><i class="fa fa-circle-o"></i>Data Pekerja</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Data Pemilih</a></li> -->
 
-            <li class="treeview menu-open">
+              <li class="treeview menu-open">
+                  <a href="#"><i class="fa fa-circle-o"></i> Data Pemilu
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu" style="display: block;">
+                    <li><a href="{% url 'data_pekerja:view' %}"><i class="fa fa-circle-o"></i> Data Pekerja</a></li>
+                    <li><a href="{% url 'data_pemilih:view' %}"><i class="fa fa-circle-o"></i> Data Pemilih</a></li>
+
+                  </ul>
+              </li>
+
+
+
+              <li class="treeview menu-open">
                   <a href="#"><i class="fa fa-circle-o"></i> Nilai Preferensi
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
@@ -36,9 +51,12 @@
                     <li><a href="{% url 'hasil:prefpt2' %}"><i class="fa fa-circle-o"></i> Peta Dua</a></li>
 
                   </ul>
+                      
               </li>
+
             <li><a href="{% url 'hasil:indpref' %}"><i class="fa fa-circle-o"></i>Index Preferensi</a></li>
             <li><a href="{% url 'hasil:view' %}"><i class="fa fa-circle-o"></i>Rangking</a></li>
+            <li><a href="{% url 'hasil:vote' %}"><i class="fa fa-circle-o"></i>Voting</a></li>
           </ul>
         </li>
 

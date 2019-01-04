@@ -100,3 +100,15 @@ class ListIndexPreferensiView(View):
         }
         return render(request, template, data)
 
+class ListVoteView(View):
+    def get(self, request):
+        template = 'hasil/voting.html'
+        pj=Pekerja.objects.all()
+        nl = helpers.dfindpref(pj).as_matrix()
+        data = {
+            # 'vote' : vote,
+            
+        }
+        return render(request, template, data)
+        
+
