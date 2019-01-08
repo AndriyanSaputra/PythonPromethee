@@ -23,6 +23,7 @@ PROJECT_APPS = [
     'management.hasil',
     'management.data_pekerja',
     'management.data_pemilih',
+    'hakakses',
     'login',
     'helper',
     # 'management.bobot',
@@ -38,6 +39,7 @@ REQUIRED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     'django_extensions',
 ]
 
