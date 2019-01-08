@@ -51,14 +51,12 @@
                     <td >
                       <a href="{% url 'data_pekerja:detail_pekerja' a.id%}" class="btn btn-info">
                         <i class="fa fa-eye"></i>
-                    </a>
+                      </a>
 
                     <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{a.id}}">
                         <i class="fa fa-trash"></i>
                     </button>
-               <!--      <a href="{% url 'data_pekerja:edit_pekerja' a.id%}" type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i></a> -->
-
-                    <!-- Modal -->
+            
                     <div class="modal fade" id="myModal{{a.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog modal-md modal-dialogs" role="document">
                             <div class="modal-content">

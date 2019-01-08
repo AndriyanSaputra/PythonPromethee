@@ -11,7 +11,7 @@ class UserForm(forms.Form):
         model = User
 
 class PemilihForm(forms.Form):
-	user = forms.CharField(max_length=100)
+	user = forms.CharField(max_length=90, required=False)
 	nip = forms.IntegerField(initial=0)
 	nama = forms.CharField(max_length=100)
 	nama_ptp =forms.CharField(max_length=100)

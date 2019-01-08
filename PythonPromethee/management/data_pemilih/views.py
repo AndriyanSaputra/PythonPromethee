@@ -3,7 +3,7 @@ from django.views.generic import View
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from orm.models import Pekerja,Pemilih
+from orm.models import Pemilih
 from management.data_pemilih.forms import UserForm,PemilihForm
 from django.contrib.auth.models import User 
 import mimetypes
@@ -54,7 +54,7 @@ class SaveDataPemilihView(View):
 
 class HapusDataPemilihView(View):
     def get(self, request, id):
-        pemilih = Pekerja.objects.filter(id=id)
+        pemilih = Pemilih.objects.filter(id=id)
         if pemilih.exists():
             pemilih.first().delete()
             messages.add_message(request, messages.INFO, 'Data Berhasil Dihapus')                                       
@@ -62,5 +62,49 @@ class HapusDataPemilihView(View):
         else:
             messages.add_message(request, messages.INFO, 'Data Gagal Dihapus !!') 
 
+class DetailDataPemilihView(View):
+    def get(self, request, id):
+        template = 'data_pemilih/detail_pemilih.html'
+        data = {
+          'pemilih' : Pemilih.objects.get(id=id)
+        }
+        return render(request, template, data)
 
+class UpdateDataPemilihView(View):
+    def post(self, request, id):
+        pemilih = Pemilih.objects.get(id=id)
+        pemilih_form = PemilihForm(request.POST or None, request.FILES)
+        user_form = UserForm(request.POST or None)
+
+        if pemilih_form.is_valid() :
+
+            if user_form.is_valid():
+                user = pemilih.user
+                user.username = user_form.cleaned_data['user']
+                user.set_password(user_form.cleaned_data['password']) 
+                user.save(force_update=True)
+                # pekerja.user = user
+
+            pemilih.user = user
+            pemilih.nip = pemilih_form.cleaned_data['nip']
+            pemilih.nama_ptp = pemilih_form.cleaned_data['nama_ptp']
+            pemilih.nama = pemilih_form.cleaned_data['nama']
+            pemilih.jenis_kelamin = pemilih_form.cleaned_data['jenis_kelamin']
+            pemilih.save(force_update=True)
+            
+           
+            messages.add_message(request, messages.INFO, 'Data Berhasil Diupdate')  
+
+
+            return redirect('data_pemilih:view')
+        else:
+            return HttpResponse(pemilih_form.errors)
+
+class UbahPemilihView(View):
+    def get(self, request, id):
+        template = 'data_pemilih/edit_pemilih.html'
+        data = {
+            'pemilih': Pemilih.objects.get(id=id),
+        }
+        return render(request, template, data)
 

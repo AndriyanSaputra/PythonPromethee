@@ -142,4 +142,11 @@ class Pemilih(models.Model):
         default=PRIA,
     )
 
+    def __str__(self):
+        return self.nama
+
+    class Meta:
+        db_table = 'Pemilih'
+        ordering = ['id']
+
 
