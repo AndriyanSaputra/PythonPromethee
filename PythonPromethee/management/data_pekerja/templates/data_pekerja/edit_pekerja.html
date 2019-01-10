@@ -16,18 +16,20 @@
     <div class="box-header with-border">
       <h3 class="box-title"> Data Pekerja</h3>
     </div>
-                            <div class="col-md-3 col-sm-3">
-                            <img src="{{pekerja.picture.url}}" id="picture" alt="" style="width: 100%; height: auto; border: 1px #d5d8dc solid; margin-top: 6px;">
-                            <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput').click();">Upload Logo
-                                <i class="fa fa-upload"></i>
-                            </button>
-                        </div>
     <!-- <div class="container"> -->
       <div class="box-body">
         <form action="{% url 'data_pekerja:update_pekerja' pekerja.id %}" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="row">
             <div class="col-md-4">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input name="user" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Username" type="email" value="{{pekerja.user}}">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input name = "password" class="form-control" id="exampleInputPassword1" placeholder="Masukkan Password" type="password" value="">
+              </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">NIP</label>
                 <input name = "nip" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nip" 
@@ -130,6 +132,14 @@
             <input type="text" class="form-control" id="pt2" name="nilaipt2" value="{{pekerja.Petaduas.nilai}}" required>
           </div>
           <br/>
+          <div class="col-md-4 col-sm-4">
+            <img src="{{pekerja.gambar.url}}" id="picture" alt="" style="width: 100%; height: auto; border: 1px #d5d8dc solid; margin-top: 6px;">
+            <a class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput').click();">
+              Upload Soal Gambar
+              <i class="fa fa-upload"></i>
+            </a>
+          
+        </div>
         <div class="form-group">
           <input id="fileInput" name='picture' type="file" style="display:none;" accept="image/*" />
         </div>
@@ -151,38 +161,8 @@
       "lengthMenu": [[5, 10, 25, 50, ], [5, 10, 25, 50,]]
     } );
   } );
-
-    function readURL(input) {
-
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          $('#picture').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    $("#fileInput").change(function () {
-      readURL(this);
-    });         
-
 </script>
-
-  {% if messages %}
-  {% for message in messages %}
-  
-  <script>
-    toastr.success('{{message}}')
-  </script>
-
-  {% endfor %}
-  {% endif %}
-
-
-<script>
+<script >
     // pkko = document.querySelector('input[name="jabatan"]:checked').value;
     function jbtn(){
       var pko = document.getElementById('pko');
@@ -249,6 +229,34 @@
         pt2.value = 4;
       }
     }
-</script>
+  </script>
 
-  {% endblock %}
+
+  <script>
+    toastr.success('{{message}}')
+
+    function readURL(input) {
+
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#picture').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $("#fileInput").change(function () {
+      readURL(this);
+    });         
+  </script>
+  {% if messages %}
+  {% for message in messages %}
+  <script>
+    toastr.success('{{message}}')
+  </script>
+  {% endfor %}
+  {% endif %}
+  {% endblock%}

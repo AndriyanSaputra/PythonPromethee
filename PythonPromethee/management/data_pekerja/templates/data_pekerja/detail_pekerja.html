@@ -17,15 +17,19 @@
                     <div class="box-body">
                             <div class="col-md-4 col-sm-4">
                                     <p  style="text-align: center; font-size: 18px; padding-top: 8px;">DPO</p>
-                                    <img src="{{pekerja.picture.url}}" alt="" style="width: 100%; height: auto; border: 1px #d5d8dc solid">
+                                    <img src="{{pekerja.gambar.url}}" alt="" style="width: 100%; height: auto; border: 1px #d5d8dc solid">
                                     <p style="text-align: center; font-size: 18px; padding-top: 8px;"></p>
-                                    <a href="{% url 'data_pekerja:edit_pekerja' pekerja.id %}" class="btn btn-success btn-block" style="margin-bottom: 8px">Ubah Info <i class="fa fa-pencil"></i></a>
                                 </div> 
                         <div class="col-md-8 col-sm-8">
                         <table class="table table-responsive table-striped table-hover">
                         <h4 class="fa-pull-right">Profil Pekerja</h4>
                             <table class="table table-responsive table-striped table-hover">
                                 <tbody>
+                                        <tr>
+                                        <td style="width: 30%">Username</td>
+                                        <td>:</td>
+                                        <td>{{pekerja.user}}</td>
+                                        </tr>
                                     
                                         <tr>
                                         <td style="width: 30%">NIP</td>
@@ -108,8 +112,12 @@
                                         <td>{{pekerja.Petaduas.praktek}}</td>
                                         </tr>
 
+                                            
+               
                                 </tbody>
                             </table>
+                                <a href="{% url 'data_pekerja:edit_pekerja' pekerja.id %}" class="btn btn-primary pull-right"><i class="fa fa-pencil-square-o"></i> Edit</a>
+
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from orm.models import Pekerja,Pko,Disiplin,Kesehatan,Psikotes,Petadua
-from management.data_pekerja.forms import PekerjaForm, PkoForm, DisiplinForm, KesehatanForm, PsikotesForm, PetaduaForm
+from management.data_pekerja.forms import PekerjaForm,PkoForm,DisiplinForm,KesehatanForm,PsikotesForm,PetaduaForm,UserForm
 from django.contrib.auth.models import User 
 import mimetypes
 import os
@@ -20,16 +20,6 @@ class ListDataPekerjaView(View):
         }
         return render(request, template, data)
 
-class AddPekerjaView(View):
-    def get(self, request):
-        template = 'data_pekerja/add_pekerja.html'
-        pekerja_form = PekerjaForm(request.POST or None, request.FILES)
-        data = {
-            'pekerja_form' : pekerja_form,
-        }
-        return render(request, template, data)
-
-
 class SaveDataPekerjaView(View):
     def post(self, request):
         pekerja_form = PekerjaForm(request.POST or None, request.FILES)
@@ -42,8 +32,19 @@ class SaveDataPekerjaView(View):
 
         if pekerja_form.is_valid() and pko_form.is_valid() and disiplin_form.is_valid() and kesehatan_form.is_valid() and psikotes_form.is_valid() and petadua_form.is_valid():
             
+            user = User()
+            user.username = request.POST['username']
+            user.set_password(request.POST['password'])
+            staff = request.POST.get('staff', None)
+            if not staff == None:
+                user.is_staff = True
+                user.save()
+
+            else:
+                user.save()
 
             pekerja = Pekerja()
+            pekerja.user = user
             pekerja.nip = pekerja_form.cleaned_data['nip']
             pekerja.nama_ptp = pekerja_form.cleaned_data['nama_ptp']
             pekerja.nama = pekerja_form.cleaned_data['nama']
@@ -52,7 +53,7 @@ class SaveDataPekerjaView(View):
             pekerja.jenis_kelamin = pekerja_form.cleaned_data['jenis_kelamin']
             pekerja.agama = pekerja_form.cleaned_data['agama']
             pekerja.status = pekerja_form.cleaned_data['status']
-            pekerja.picture = pekerja_form.cleaned_data['picture']
+            pekerja.gambar = pekerja_form.cleaned_data['gambar']
             pekerja.save()
 
             pko = Pko()
@@ -105,14 +106,6 @@ class HapusDataPekerjaView(View):
         else:
             messages.add_message(request, messages.INFO, 'Data Gagal Dihapus !!') 
 
-class UbahPekerjaView(View):
-    def get(self, request, id):
-        template = 'data_pekerja/edit_pekerja.html'
-        data = {
-            'pekerja': Pekerja.objects.get(id=id),
-        }
-        return render(request, template, data)
-
 
 class UpdateDataPekerjaView(View):
     def post(self, request, id):
@@ -123,11 +116,18 @@ class UpdateDataPekerjaView(View):
         kesehatan_form = KesehatanForm(request.POST or None)
         psikotes_form = PsikotesForm(request.POST or None)
         petadua_form = PetaduaForm(request.POST or None)
+        user_form = UserForm(request.POST or None)
 
         if pekerja_form.is_valid() and pko_form.is_valid() and disiplin_form.is_valid() and kesehatan_form.is_valid() and psikotes_form.is_valid() and petadua_form.is_valid():
 
+            if user_form.is_valid():
+                user = pekerja.user
+                user.username = user_form.cleaned_data['user']
+                user.set_password(user_form.cleaned_data['password']) 
+                user.save(force_update=True)
                 # pekerja.user = user
 
+            pekerja.user = user
             pekerja.nip = pekerja_form.cleaned_data['nip']
             pekerja.nama_ptp = pekerja_form.cleaned_data['nama_ptp']
             pekerja.nama = pekerja_form.cleaned_data['nama']
@@ -136,10 +136,10 @@ class UpdateDataPekerjaView(View):
             pekerja.jenis_kelamin = pekerja_form.cleaned_data['jenis_kelamin']
             pekerja.agama = pekerja_form.cleaned_data['agama']
             pekerja.status = pekerja_form.cleaned_data['status']
-            newpic = pekerja_form.cleaned_data.get('picture', None)
+            newpic = pekerja_form.cleaned_data.get('gambar', None)
 
             if not newpic == None:
-                    pekerja.picture = newpic
+                    pekerja.gambar = newpic
                     
             pekerja.save(force_update=True)
             
@@ -185,6 +185,12 @@ class DetailDataPekerjaView(View):
         }
         return render(request, template, data)
 
-
+class UbahPekerjaView(View):
+    def get(self, request, id):
+        template = 'data_pekerja/edit_pekerja.html'
+        data = {
+            'pekerja': Pekerja.objects.get(id=id),
+        }
+        return render(request, template, data)
 
 
