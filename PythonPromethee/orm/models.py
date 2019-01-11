@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 import time
 import os
+from orm import FileUploader
 
 class Pekerja(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
     nip = models.IntegerField(default=0)
     nama_ptp = models.CharField(max_length=100, blank=True, null=True)
     nama = models.CharField(max_length=100, blank=True, null=True)
@@ -35,11 +35,12 @@ class Pekerja(models.Model):
         choices=ST_CHOICES,
         default=KAWIN,
     )
-    gambar = models.ImageField(upload_to="pekerja",
-                             null=True,
-                             blank=True,
-                             help_text="Upload Foto Soal Anda"
-                             )
+    picture = models.ImageField(upload_to=FileUploader.file_profile,
+                            null=True,
+                            blank=True,
+                            help_text="Upload Fotomu sebagai gambar profile",
+                            default='pekerja/icon.png'
+                            )
 
 
     def __str__(self):
@@ -141,6 +142,12 @@ class Pemilih(models.Model):
         choices=JK_CHOICES,
         default=PRIA,
     )
+    picture = models.ImageField(upload_to=FileUploader.file_pemilih,
+                        null=True,
+                        blank=True,
+                        help_text="Upload Fotomu sebagai gambar profile",
+                        default='pemilih/icon.png'
+                        )
 
     def __str__(self):
         return self.nama
@@ -149,4 +156,34 @@ class Pemilih(models.Model):
         db_table = 'Pemilih'
         ordering = ['id']
 
+class HakAkses(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    nama = models.CharField(max_length=100, blank=True, null=True)
 
+    def __str__(self):
+        return self.nama
+
+    class Meta:
+        db_table = 'Login'
+        ordering = ['id']
+
+class Calon(models.Model):
+    nip = models.IntegerField(default=0)
+    nama = models.CharField(max_length=100, blank=True, null=True)
+    nama_ptp = models.CharField(max_length=100, blank=True, null=True)
+    visi = models.CharField(max_length=100, blank=True, null=True)
+    misi = models.CharField(max_length=100, blank=True, null=True)
+    picture = models.ImageField(upload_to=FileUploader.file_calon,
+                        null=True,
+                        blank=True,
+                        help_text="Upload Fotomu sebagai gambar profile",
+                        default='calon/icon.png'
+                        )
+
+
+    def __str__(self):
+        return self.nama
+
+    class Meta:
+        db_table = 'Calon'
+        ordering = ['id']

@@ -4,6 +4,7 @@ from management.data_pemilih import views
 
 urlpatterns = [
     url (r'^$', views.ListDataPemilihView.as_view(), name='view'),
+    url (r'^add_pemilih$', views.AddPemilihView.as_view(), name='add_pemilih'),
     url (r'^save_pemilih$', views.SaveDataPemilihView.as_view(), name='save_pemilih'),
     url (r'^hapus_pemilih/(?P<id>\d+)$', views.HapusDataPemilihView.as_view(), name='hapus_pemilih'),
   	url (r'^detail_pemilih/(?P<id>\d+)$', views.DetailDataPemilihView.as_view(), name='detail_pemilih'),

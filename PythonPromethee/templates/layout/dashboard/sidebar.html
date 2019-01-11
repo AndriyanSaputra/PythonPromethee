@@ -1,19 +1,19 @@
 {% load staticfiles %}
- <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="header"></li>
-        <li>
-            <a href="{% url 'admin:index' %}">
-                <i class="fa fa-user"></i> Admin Site</a>
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- Sidebar user panel -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="header">MAIN NAVIGATION</li>
+      <li class="header"></li>
+      <li>
+        <a href="{% url 'admin:index' %}">
+          <i class="fa fa-user"></i> Admin Site</a>
         </li>
         <li class="header"></li>
 
-         <li class="treeview active menu-open">
+        <li class="treeview active menu-open">
           <a href="#">
             <i class="fa fa-database"></i>
             <span>Data Awal</span> 
@@ -22,41 +22,42 @@
            <!--  <li><a href="{% url 'data_pekerja:view' %}"><i class="fa fa-circle-o"></i>Data Pekerja</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>Data Pemilih</a></li> -->
 
-              <li class="treeview menu-open">
-                  <a href="#"><i class="fa fa-circle-o"></i> Data Pemilu
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu" style="display: block;">
-                    <li><a href="{% url 'data_pekerja:view' %}"><i class="fa fa-circle-o"></i> Data Pekerja</a></li>
-                    <li><a href="{% url 'data_pemilih:view' %}"><i class="fa fa-circle-o"></i> Data Pemilih</a></li>
+            <li class="treeview menu-open">
+              <a href="#"><i class="fa fa-circle-o"></i> Data Pemilu
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: block;">
+                <li><a href="{% url 'data_pekerja:view' %}"><i class="fa fa-circle-o"></i> Data Pekerja</a></li>
+                <li><a href="{% url 'data_pemilih:view' %}"><i class="fa fa-circle-o"></i> Data Pemilih</a></li>
+                <li><a href="{% url 'data_calon:view' %}"><i class="fa fa-circle-o"></i> Data Calon</a></li>
 
-                  </ul>
-              </li>
+              </ul>
+            </li>
 
 
 
-              <li class="treeview menu-open">
-                  <a href="#"><i class="fa fa-circle-o"></i> Nilai Preferensi
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu" style="display: block;">
-                    <li><a href="{% url 'hasil:prefpko' %}"><i class="fa fa-circle-o"></i> Pko</a></li>
-                    <li><a href="{% url 'hasil:prefdsp' %}"><i class="fa fa-circle-o"></i> Disiplin</a></li>
-                    <li><a href="{% url 'hasil:prefkes' %}"><i class="fa fa-circle-o"></i> Kesehatan</a></li>
-                    <li><a href="{% url 'hasil:prefpsk' %}"><i class="fa fa-circle-o"></i> Psikotes</a></li>
-                    <li><a href="{% url 'hasil:prefpt2' %}"><i class="fa fa-circle-o"></i> Peta Dua</a></li>
+            <li class="treeview menu-open">
+              <a href="#"><i class="fa fa-circle-o"></i> Nilai Preferensi
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: block;">
+                <li><a href="{% url 'hasil:prefpko' %}"><i class="fa fa-circle-o"></i> Pko</a></li>
+                <li><a href="{% url 'hasil:prefdsp' %}"><i class="fa fa-circle-o"></i> Disiplin</a></li>
+                <li><a href="{% url 'hasil:prefkes' %}"><i class="fa fa-circle-o"></i> Kesehatan</a></li>
+                <li><a href="{% url 'hasil:prefpsk' %}"><i class="fa fa-circle-o"></i> Psikotes</a></li>
+                <li><a href="{% url 'hasil:prefpt2' %}"><i class="fa fa-circle-o"></i> Peta Dua</a></li>
 
-                  </ul>
-                      
-              </li>
+              </ul>
+
+            </li>
 
             <li><a href="{% url 'hasil:indpref' %}"><i class="fa fa-circle-o"></i>Index Preferensi</a></li>
             <li><a href="{% url 'hasil:view' %}"><i class="fa fa-circle-o"></i>Rangking</a></li>
-            <li><a href="{% url 'hasil:vote' %}"><i class="fa fa-circle-o"></i>Voting</a></li>
+            <li><a href="{% url 'voting:view' %}"><i class="fa fa-circle-o"></i>Voting</a></li>
           </ul>
         </li>
 

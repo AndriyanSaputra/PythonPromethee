@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^hasil/', include('management.hasil.urls', namespace='hasil')),
     url(r'^datapekerja/', include('management.data_pekerja.urls', namespace='data_pekerja')),
     url(r'^datapemilih/', include('management.data_pemilih.urls', namespace='data_pemilih')),
+    url(r'^data_calon/', include('management.data_calon.urls', namespace='data_calon')),
+    url(r'^voting/', include('management.voting.urls', namespace='voting')),
     # url(r'^bobot/', include('management.bobot.urls', namespace='bobot')),
 ]
 

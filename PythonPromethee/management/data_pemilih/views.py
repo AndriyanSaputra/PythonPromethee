@@ -19,6 +19,17 @@ class ListDataPemilihView(View):
         }
         return render(request, template, data)
 
+class AddPemilihView(View):
+    def get(self, request):
+        template = 'data_pemilih/add_pemilih.html'
+        pk = Pemilih.objects.all()
+        
+        # pekerja_form = PekerjaForm(request.POST or None, request.FILES)
+        data = {
+            'pemilih' : pk,
+        }
+        return render(request, template, data)
+
 class SaveDataPemilihView(View):
     def post(self, request):
         pemilih_form = PemilihForm(request.POST or None, request.FILES)
@@ -42,6 +53,7 @@ class SaveDataPemilihView(View):
             pemilih.nama_ptp = pemilih_form.cleaned_data['nama_ptp']
             pemilih.nama = pemilih_form.cleaned_data['nama']
             pemilih.jenis_kelamin = pemilih_form.cleaned_data['jenis_kelamin']
+            pemilih.picture = pemilih_form.cleaned_data['picture']
             pemilih.save()
 
             
@@ -90,6 +102,10 @@ class UpdateDataPemilihView(View):
             pemilih.nama_ptp = pemilih_form.cleaned_data['nama_ptp']
             pemilih.nama = pemilih_form.cleaned_data['nama']
             pemilih.jenis_kelamin = pemilih_form.cleaned_data['jenis_kelamin']
+            newpic = pemilih_form.cleaned_data.get('picture', None)
+
+            if not newpic == None:
+                    pemilih.picture = newpic
             pemilih.save(force_update=True)
             
            

@@ -5,7 +5,7 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      Edit Data Pekerja Organisasi 
+      Edit Data Pemilih  
     </h1>
     <ol class="breadcrumb">
     </ol>
@@ -14,7 +14,13 @@
   <section class="content-header"></section>
   <div class="box box-primary">
     <div class="box-header with-border">
-      <h3 class="box-title"> Data Pekerja</h3>
+      <h3 class="box-title"> Data Calon</h3>
+    </div>
+    <div class="col-md-3 col-sm-3">
+      <img src="{{pemilih.picture.url}}" id="picture" alt="" style="width: 100%; height: auto; border: 1px #d5d8dc solid; margin-top: 6px;">
+      <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput').click();">Upload Logo
+        <i class="fa fa-upload"></i>
+      </button>
     </div>
     <!-- <div class="container"> -->
       <div class="box-body">
@@ -22,46 +28,49 @@
           {% csrf_token %}
           <div class="row">
             <div class="col-md-4">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Username</label>
-                <input name="user" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Username" type="email" value="{{pemilih.user}}">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input name = "password" class="form-control" id="exampleInputPassword1" placeholder="Masukkan Password" type="password" value="">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">NIP</label>
-                <input name = "nip" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nip" 
-                type="number" value="{{pemilih.nip}}" >
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Nama Perusahaan</label>
-                <input name = "nama_ptp" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama PTP" value="{{pemilih.nama_ptp}}">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Nama Pekerja</label>
-                <input name = "nama" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Pekerja" value="{{pemilih.nama}}" >
-              </div>
-             
-              <div class="form-group">
-                <label for="" class="control-label">Jenis Kelamin</label>
-              </div>
-              <div class="form-group">
-                <input required type="radio" name="jenis_kelamin" value="Pria" {% if pemilih.jenis_kelamin == 'Pria' %} checked {% endif %}>Laki - Laki &nbsp; &nbsp; &nbsp;
-                <input required type="radio" name="jenis_kelamin" value="Wanita" {% if pemilih.jenis_kelamin == 'Wanita' %} checked {% endif %}> Perempuan
-              </div>
+             <div class="form-group">
+              <label for="exampleInputEmail1">Username</label>
+              <input name="user" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Username" type="email" value="{{pemilih.user}}">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input name = "password" class="form-control" id="exampleInputPassword1" placeholder="Masukkan Password" type="password" value="">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">NIP</label>
+              <input name = "nip" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nip" 
+              type="number" value="{{pemilih.nip}}">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nama Perusahaan</label>
+              <input name = "nama_ptp" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama PTP" value="{{pemilih.nama_ptp}}">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nama Pekerja</label>
+              <input name = "nama" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Pekerja" value="{{pemilih.nama}}" >
+            </div>
+            <div class="form-group">
+              <label for="" class="control-label">Jenis Kelamin</label>
+            </div>
+            <div class="form-group">
+              <input required type="radio" name="jenis_kelamin" value="Pria" {% if pemilih.jenis_kelamin == 'Pria' %} checked {% endif %}>Laki - Laki &nbsp; &nbsp; &nbsp;
+              <input required type="radio" name="jenis_kelamin" value="Wanita" {% if pemilih.jenis_kelamin == 'Wanita' %} checked {% endif %}> Perempuan
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="submit" class="btn btn-primary">Cancel</button>
+            </div>
+            <div class="form-group">
+              <input id="fileInput" name='picture' type="file" style="display:none;" accept="image/*" />
+            </div>
           </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-success pull-right" style="margin-left: 8px;">Simpan</button>
-      </div>
-    </form>
-    <!-- </div> -->
+        </div>
+      </form>
+      <!-- </div> -->
 
+    </div>
   </div>
 </div>
-</div>
-
 <script type="text/javascript">
   $('#date').datepicker();
   $(document).ready(function() {
@@ -71,33 +80,33 @@
   } );
 </script>
 
+<script>
+  function readURL(input) {
 
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
 
-  <script>
-    toastr.success('{{message}}')
-
-    function readURL(input) {
-
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          $('#picture').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
+      reader.onload = function (e) {
+        $('#picture').attr('src', e.target.result);
       }
-    }
 
-    $("#fileInput").change(function () {
-      readURL(this);
-    });         
-  </script>
-  {% if messages %}
-  {% for message in messages %}
-  <script>
-    toastr.success('{{message}}')
-  </script>
-  {% endfor %}
-  {% endif %}
-  {% endblock%}
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#fileInput").change(function () {
+    readURL(this);
+  });         
+</script>
+{% if messages %}
+{% for message in messages %}
+<script>
+  toastr.success('{{message}}')
+</script>
+
+{% endfor %}
+{% endif %}
+
+
+
+{% endblock %}

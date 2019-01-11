@@ -32,30 +32,15 @@ class DoLoginView(View):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            remember = form.cleaned_data['remember']
-
             # ngecek user ada apa nggak
             user = authenticate(username=username, password=password) 
-            
-            if user is not None:
-                # checkbox remember 
-                print(user.is_staff)
- 
-                if not remember:
-                    settings.SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-                    request.session.set_expiry(0)
-                else:
-                    settings.SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-                if authcheck.AuthCheck.isPekerja(user):
-                    login(request, user)
-                    return redirect('data_pekerja:view')
-                else:
-                     messages.add_message(request, messages.WARNING,
-                                 'Akun Belum Terdaftar Sebagai User !!')
+            if user:
+                login(request, user)
+                return redirect('data_pekerja:view')
             else:
-                  messages.add_message(request, messages.WARNING,
+                messages.add_message(request, messages.WARNING,
                                  'Username dan atau Password tidak ditemukan !!')
-
+                
         data  = {
             'form': form,
         }

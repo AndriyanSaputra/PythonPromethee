@@ -2,5 +2,5 @@ from django.contrib import admin
 from orm.models import Pemilih
 
 class PemilihAdmin(admin.ModelAdmin):
-    pass
+	pass
 admin.site.register(Pemilih, PemilihAdmin)
