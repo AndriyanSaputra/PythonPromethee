@@ -168,9 +168,8 @@ class HakAkses(models.Model):
         ordering = ['id']
 
 class Calon(models.Model):
-    nip = models.IntegerField(default=0)
-    nama = models.CharField(max_length=100, blank=True, null=True)
-    nama_ptp = models.CharField(max_length=100, blank=True, null=True)
+    nama_ketua = models.CharField(max_length=100, blank=True, null=True)
+    nama_wakil = models.CharField(max_length=100, blank=True, null=True)
     visi = models.CharField(max_length=100, blank=True, null=True)
     misi = models.CharField(max_length=100, blank=True, null=True)
     picture = models.ImageField(upload_to=FileUploader.file_calon,
@@ -179,10 +178,16 @@ class Calon(models.Model):
                         help_text="Upload Fotomu sebagai gambar profile",
                         default='calon/icon.png'
                         )
+    picture2 = models.ImageField(upload_to=FileUploader.file_calon2,
+                        null=True,
+                        blank=True,
+                        help_text="Upload Fotomu sebagai gambar profile",
+                        default='calon/icon.png'
+                        )
 
 
     def __str__(self):
-        return self.nama
+        return self.nama_ketua
 
     class Meta:
         db_table = 'Calon'

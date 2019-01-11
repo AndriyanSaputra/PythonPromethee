@@ -3,69 +3,72 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-           Detail Pekerja {{calon.nama}}
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Detail Data Calon </a></li>
-        </ol>
-    </section>
+         Detail Pekerja {{calon.nama_ketua}}
+     </h1>
+     <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Detail Data Calon </a></li>
+    </ol>
+</section>
 
-    <section class="content">
-        <div class="row">
-            <div class="col-md-12 col-md-offset-0">
-                <div class="box box-success">
-                    <div class="box-body">
-                            <div class="col-md-4 col-sm-4">
-                                    <p  style="text-align: center; font-size: 18px; padding-top: 8px;">DPO</p>
-                                    <img src="{{calon.picture.url}}" alt="" style="width: 100%; height: auto; border: 1px #d5d8dc solid">
-                                    <p style="text-align: center; font-size: 18px; padding-top: 8px;"></p>
-                                    <a href="{% url 'data_calon:edit_calon' calon.id %}" class="btn btn-success btn-block" style="margin-bottom: 8px">Ubah Info <i class="fa fa-pencil"></i></a>
-                                </div> 
-                        <div class="col-md-8 col-sm-8">
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-md-offset-0">
+            <div class="box box-success">
+                <div class="box-body">
+                    <div class="col-md-4 col-sm-4">
+                        <p  style="text-align: center; font-size: 18px; padding-top: 8px;">Foto Calon Ketua</p>
+                        <img src="{{calon.picture.url}}" alt="" style="width: 300px; height: 260px; border: 1px #d5d8dc solid">
+                        <p style="text-align: center; font-size: 18px; padding-top: 8px;"></p>
+                    </div> 
+                    <div class="col-md-4 col-sm-4">
+                        <p  style="text-align: center; font-size: 18px; padding-top: 8px;">Foto Calon Wakil</p>
+                        <img src="{{calon.picture2.url}}" alt="" style="width: 300px; height: 260px; border: 1px #d5d8dc solid">
+                        <p style="text-align: center; font-size: 18px; padding-top: 8px;"></p>
+                    </div> 
+                    <div class="col-md-4 col-sm-4">
                         <table class="table table-responsive table-striped table-hover">
-                        <h4 class="fa-pull-right">Profil Pekerja</h4>
+                            <h4 class="fa-pull-right">Profil Pekerja</h4>
                             <table class="table table-responsive table-striped table-hover">
                                 <tbody>
-                                        <tr>
-                                        <td style="width: 30%">NIP</td>
+                                    <tr>
+                                        <td style="width: 30%">Nama Ketua</td>
                                         <td>:</td>
-                                        <td>{{calon.nip}}</td>
-                                        </tr>
-                                        <tr>
-                                        <td style="width: 30%">Nama Pekerja</td>
+                                        <td>{{calon.nama_ketua}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 30%">Nama Wakil</td>
                                         <td>:</td>
-                                        <td>{{calon.nama}}</td>
-                                        </tr>
-                                        <tr>
-                                        <td style="width: 30%">Nama PTP</td>
-                                        <td>:</td>
-                                        <td>{{calon.nama_ptp}}</td>
-                                        </tr>
-                                        <tr>
+                                        <td>{{calon.nama_wakil}}</td>
+                                    </tr>
+                                    <tr>
                                         <td style="width: 30%">Visi</td>
                                         <td>:</td>
                                         <td>{{calon.visi}}</td>
-                                        </tr>
-                                        <tr>
+                                    </tr>
+                                    <tr>
                                         <td style="width: 30%">Misi</td>
                                         <td>:</td>
                                         <td>{{calon.misi}}</td>
-                                        </tr>
+                                    </tr>
+
                                 </tbody>
                             </table>
+                            <a href="{% url 'data_calon:edit_calon' calon.id %}" class="btn btn-success btn-block" style="margin-bottom: 8px">Ubah Info <i class="fa fa-pencil"></i></a>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-</div>
+
+    </div>
 </section>
 
 {% if messages %}
-  {% for message in messages %}
-  <script>
+{% for message in messages %}
+<script>
     toastr.success('{{message}}')
-  </script>
-  {% endfor %}
-  {% endif %}
+</script>
+{% endfor %}
+{% endif %}
 {% endblock %}

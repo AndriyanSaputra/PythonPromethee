@@ -28,27 +28,23 @@
           {% csrf_token %}
           <div class="row">
             <div class="col-md-4">
+              
               <div class="form-group">
-                <label for="exampleInputEmail1">NIP</label>
-                <input name = "nip" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nip" 
-                type="number" value="{{calon.nip}}" >
+                <label for="exampleInputEmail1">Nama Calon Ketua</label>
+                <input name = "nama" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Ketua" value="{{calon.nama_ketua}}" >
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Nama Pekerja</label>
-                <input name = "nama" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Pekerja" value="{{calon.nama}}" >
+                <label for="exampleInputEmail1">Nama Calon Wakil</label>
+                <input name = "nama" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Wakil" value="{{calon.nama_wakil}}" >
               </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Nama Perusahaan</label>
-                <input name = "nama_ptp" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama PTP" value="{{calon.nama_ptp}}">
-              </div> 
                <div class="form-group">
                 <label for="exampleInputEmail1">Visi</label>
-                <textarea name = "visi" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Alamat Anda"  required>{{calon.visi}}
+                <textarea name = "visi" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Visi Anda"  required>{{calon.visi}}
                 </textarea>
               </div>
                <div class="form-group">
                 <label for="exampleInputEmail1">Misi</label>
-                <textarea name = "misi" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Alamat Anda"  required>{{calon.misi}}
+                <textarea name = "misi" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Misi Anda"  required>{{calon.misi}}
                 </textarea>
               </div>
               <div class="form-group">

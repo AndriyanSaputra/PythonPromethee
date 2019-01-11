@@ -9,7 +9,7 @@
         <ol class="breadcrumb">
             <li>
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> Add Calon</a>
+                    <i class="fa fa-dashboard">Add Calon</i></a>
                 </li>
                 <li class="active">Template</li>
             </ol>
@@ -20,77 +20,90 @@
                 <div class="col-md-12">
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            Add Calon 
-                        </div>
-                        <div class="col-sm-3 col-sm-3">
-                            <img src="{% static 'images/icon.png' %}" id="picture" alt="" style="width: 100%; height: auto;">
-                            <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput').click();">Upload Gambar <i class="fa fa-upload"></i>
-                            </button>
-                        </div>
-                        <div class="box-body">
-                            <form  action="{% url 'data_calon:save_calon'%}" method="POST" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <div class="row">
-
-                                    <div class="col-md-4">   
-                                        <div class="form-group">
-                                            <label for="" class="control-label">Nomor Induk Pekerja</label>
-                                            <input type="text" class="form-control" name="nip"  required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="" class="control-label">Nama Perusahaan</label>
-                                            <input type="text" class="form-control" name="nama_ptp"  required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="" class="control-label">Nama Pekerja</label>
-                                            <input type="text" class="form-control" name="nama"  required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="" class="control-label">Visi</label>
-                                            <textarea name="visi" rows="3" class="form-control" required></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="" class="control-label">Misi</label>
-                                            <textarea name="misi" rows="3" class="form-control" required></textarea>
-                                        </div>
-                                        <hr/>
-                                        <div class="form-group">
-                                            <input id="fileInput" name='picture' type="file" style="display:none;" accept="image/*" value="" />
-                                        </div>
-
-                                        <div align="right">
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                            <button type="submit" class="btn btn-primary">Cancel</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </form>
+                            Tambahkan Data Calon Ketua dan Wakil 
                         </div>
                     </div>
-                </div>
+                    <form action="{% url 'data_calon:save_calon' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="col-md-3">
+                            <img src="{% static 'images/icon.png' %}" id="picture" alt="" style="width: 230px; height: 200px;">
+                            <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput').click();">Upload Gambar <i class="fa fa-upload"></i>
+                            </button>
+                            <div class="form-group">
+                                <label for="" class="control-label">Nama Calon Ketua</label>
+                                <input type="text" class="form-control" name="nama_ketua"  required>
+                            </div>
+                            <div class="form-group">
+                                <input id="fileInput" name='picture' type="file" style="display:none;" accept="image/*" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                          <img src="{% static 'images/icon.png' %}" id="picture2" alt="" style="width: 230px; height: 200px;">
+                          <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput2').click();">Upload Gambar <i class="fa fa-upload"></i>
+                          </button>
+                          <div class="form-group">
+                            <label for="" class="control-label">Nama Calon Wakil</label>
+                            <input type="text" class="form-control" name="nama_wakil"  required>
+                        </div>
+                        <div class="form-group">
+                            <input id="fileInput2" name='picture2' type="file" style="display:none;" accept="image/*" value="" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="" class="control-label">Visi</label>
+                            <textarea name="visi" rows="5" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Misi</label>
+                            <textarea name="misi" rows="5" class="form-control" required></textarea>
+                        </div>
+                        <div align="right">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-danger">Cancel</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </section>
-    </div>
-    <script>
-        $('#date').datepicker();
+        </div>
 
-        function readURL(input) {
+    </section>
 
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+</div>
+<script>
+    $('#date').datepicker();
 
-                reader.onload = function (e) {
-                    $('#picture').attr('src', e.target.result);
-                }
+    function readURL(input) {
 
-                reader.readAsDataURL(input.files[0]);
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#picture').attr('src', e.target.result);
             }
-        }
 
-        $("#fileInput").change(function () {
-            readURL(this);
-        });        
-    </script>
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#fileInput").change(function () {
+        readURL(this);
+    });      
+
+    function readURLTwo(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#picture2').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#fileInput2").change(function () {
+        readURLTwo(this);
+    });      
+</script>
 {% endblock %}
