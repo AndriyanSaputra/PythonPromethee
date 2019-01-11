@@ -16,9 +16,15 @@
     <div class="box-header with-border">
       <h3 class="box-title"> Data Calon</h3>
     </div>
-    <div class="col-md-3 col-sm-3">
-      <img src="{{calon.picture.url}}" id="picture" alt="" style="width: 100%; height: auto; border: 1px #d5d8dc solid; margin-top: 6px;">
-      <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput').click();">Upload Logo
+    <div class="col-md-4 ">
+      <img src="{{calon.picture.url}}" id="picture" alt="" style="width: 340px; height: 320px; border: 1px #d5d8dc solid; margin-top: 6px;">
+      <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput').click();">Upload Foto Ketua
+        <i class="fa fa-upload"></i>
+      </button>
+    </div>
+    <div class="col-md-4">
+      <img src="{{calon.picture2.url}}" id="picture2" alt="" style="width: 340px; height: 320px; border: 1px #d5d8dc solid; margin-top: 6px;">
+      <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput2').click();">Upload Foto Wakil
         <i class="fa fa-upload"></i>
       </button>
     </div>
@@ -28,21 +34,21 @@
           {% csrf_token %}
           <div class="row">
             <div class="col-md-4">
-              
+
               <div class="form-group">
                 <label for="exampleInputEmail1">Nama Calon Ketua</label>
-                <input name = "nama" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Ketua" value="{{calon.nama_ketua}}" >
+                <input name = "nama_ketua" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Ketua" value="{{calon.nama_ketua}}" >
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Nama Calon Wakil</label>
-                <input name = "nama" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Wakil" value="{{calon.nama_wakil}}" >
+                <input name = "nama_wakil" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Wakil" value="{{calon.nama_wakil}}" >
               </div>
-               <div class="form-group">
+              <div class="form-group">
                 <label for="exampleInputEmail1">Visi</label>
                 <textarea name = "visi" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Visi Anda"  required>{{calon.visi}}
                 </textarea>
               </div>
-               <div class="form-group">
+              <div class="form-group">
                 <label for="exampleInputEmail1">Misi</label>
                 <textarea name = "misi" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Misi Anda"  required>{{calon.misi}}
                 </textarea>
@@ -50,12 +56,17 @@
               <div class="form-group">
                 <input id="fileInput" name='picture' type="file" style="display:none;" accept="image/*" />
               </div>
+              <div class="form-group">
+                <input id="fileInput2" name='picture2' type="file" style="display:none;" accept="image/*" />
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Save</button>
+              <a href="{%url 'data_calon:view'%}" class="btn btn-danger">Cancel</a>
+  
             </div>
           </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="submit" class="btn btn-primary">Cancel</button>
-          </div>
+          
         </form>
         <!-- </div> -->
 
@@ -86,6 +97,21 @@
 
     $("#fileInput").change(function () {
       readURL(this);
+    }); 
+    function readURLTwo(input) {
+
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#picture2').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    $("#fileInput2").change(function () {
+      readURLTwo(this);
     });         
 
   </script>
