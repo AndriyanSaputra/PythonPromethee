@@ -2,14 +2,13 @@ from django.shortcuts import render, redirect, get_list_or_404
 from django.views.generic import View
 from django.contrib import messages
 from django.http import HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from orm.models import Pekerja,Pko,Disiplin,Kesehatan,Psikotes,Petadua
+from django.contrib.auth.mixins import LoginRequiredMixin   
+from helper.views import ManagementAccessView, PemilihAccessView
 from management.data_pekerja.forms import PekerjaForm, PkoForm, DisiplinForm, KesehatanForm, PsikotesForm, PetaduaForm
 from django.contrib.auth.models import User 
 import mimetypes
 import os
-
-
 
 class ListDataPekerjaView(View):
     def get(self, request):
@@ -24,8 +23,6 @@ class AddPekerjaView(View):
     def get(self, request):
         template = 'data_pekerja/add_pekerja.html'
         pk = Pekerja.objects.all()
-        
-        # pekerja_form = PekerjaForm(request.POST or None, request.FILES)
         data = {
             'pekerja' : pk,
         }
@@ -40,11 +37,7 @@ class SaveDataPekerjaView(View):
         kesehatan_form = KesehatanForm(request.POST or None)
         psikotes_form = PsikotesForm(request.POST or None)
         petadua_form = PetaduaForm(request.POST or None)
-
-
         if pekerja_form.is_valid() and pko_form.is_valid() and disiplin_form.is_valid() and kesehatan_form.is_valid() and psikotes_form.is_valid() and petadua_form.is_valid():
-            
-
             pekerja = Pekerja()
             pekerja.nip = pekerja_form.cleaned_data['nip']
             pekerja.nama_ptp = pekerja_form.cleaned_data['nama_ptp']
@@ -109,10 +102,26 @@ class HapusDataPekerjaView(View):
 
 class UbahPekerjaView(View):
     def get(self, request, id):
+        tgl = Pekerja.objects.filter(id=id)
+        if not tgl.exists():
+            return redirect('data_pekerja:view')
+        pkj = tgl.first()
+        initial = {
+
+            'id': pkj.id,
+            # 'nama': siswa.nama,
+            # 'jenis_kelamin': siswa.jenis_kelamin,
+            'tgl_lahir': pkj.tgl_lahir,
+            # 'user': siswa.user,
+        }
+
+        form = PekerjaForm(initial=initial)
         template = 'data_pekerja/edit_pekerja.html'
         data = {
+            'form' : form,
             'pekerja': Pekerja.objects.get(id=id),
         }
+
         return render(request, template, data)
 
 

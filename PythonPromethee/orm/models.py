@@ -184,6 +184,7 @@ class Calon(models.Model):
                         help_text="Upload Fotomu sebagai gambar profile",
                         default='calon/icon.png'
                         )
+    score = models.IntegerField(default=0)
 
 
     def __str__(self):

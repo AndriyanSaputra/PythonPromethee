@@ -1,21 +1,20 @@
-# from orm.models import Pekerja
 
-# class AuthCheck:
+from orm.models import Pemilih
 
-#     @staticmethod
-#     def isSuperUser(user):
-#         if user.is_superuser:
-#             return True
-#         else:
-#             return False
-#     @staticmethod
-#     def isPekerja(user):
-#         if user.is_staff:
-#             try:
-#                 user.pekerja
-#                 return True
-#             except Pekerja.DoesNotExist:
-#                 return False
-#         else:
-#             return False
-    
+class AuthCheck:
+    @staticmethod
+    def isSuperUser(user):
+        if user.is_superuser:
+            return True
+        else:
+            return False
+    @staticmethod
+    def isPemilih(user):
+        if user.is_staff:
+            try:
+                user.pemilih
+                return True
+            except Pemilih.DoesNotExist:
+                return False
+        else:
+            return False

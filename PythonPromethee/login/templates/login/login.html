@@ -1,3 +1,4 @@
+
 {% extends 'layout/login/index.html' %} 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,55 +9,52 @@
 </head>
 <body>
   {% block content %} 
-  <div class="login-box">
-    <div class="login-logo">
-      <!-- <a>Login</a> -->
-    <b>Selamat Datang  </b>
-    <b>Di Website FPBI</b>
-    </diDaily Sales
-3,500€
-Completed Tasks
-12,100K
-v>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-      <p class="login-box-msg">Silahkan Masukkan Username dan Password</p>
-      
-      <form action="{% url 'login:doLogin' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group has-feedback">
-          <input type="text" class="form-control" placeholder="Email" name="username">
-          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-        </div>
-        <div class="form-group has-feedback">
-          <input type="password" class="form-control" placeholder="Password" name="password">
-          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        </div>
+  <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container">
+        <h2></h2>
+        <h6 style="text-align: justify"></h6>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container">
         <div class="row">
-          <div class="col-xs-8">
-            <div class="checkbox icheck">
-              <label>
-                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;">
-                  <input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
-                  <ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                </label>
+          <div class="col-md-6">
+            <h2 align="center"><b>Federasi Perjuangan Buruh Indonesia</b></h2>
+            <div class="box box-default">
+              <div class="box-body">
+                <img src="../../../media/picture/1.jpg" style="width: 540px ; height: 300px ; ">
               </div>
             </div>
-            <!-- /.col -->
-            <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-            </div>
-            <!-- /.col -->
           </div>
-        </form>     
-      </div>
-      <!-- /.login-box-body -->
-    </div>
-    {% if messages %} {% for message in messages %} {% if message.tags == 'warning' %}
-    <script>
-      toastr.error('{{message}}')
-    </script>
-    {% endif %} {% endfor %} {% endif %}
-    {% endblock %}
-  </body>
-  </html>
+          <div class="col-md-6">
+            <div class="box-title">
+              <h2 align="center"><b>Visi</b></h2>
+              <h4 align="justify" style=""><b>
+                1. Memperjuangkan terwujudnya masyarakat pekerja yang di perlakukan secara adil, hidup sejahtera dan bermartabat.
+                <br>
+                <br>
+              2. Membangun serikat pekerja yang demokratis, bebas, representative, independen, dalam mewujudkan kesejahteraan dan keadilan sosial.</b></h4>
+              <h2 align="pull-left">Misi</h2>
+              <h4 align="justify"><b>                          
+               1. Meningkatkan kualitas kehidupan dan penghidupan pekerja Indonesia dan keluarga yang layak bagi kemanusiaan yang adil dan beradab.
+               <br>
+               <br>
+                2. Meningkatkan rasa kesetiakawanan  dan persaudaraan kaum pekerja dan keluarganya.
+                3. Meningktakan produktifitas kerja, syarat – syarat kerja, dan kondisi kerja  
+                4. Mempunyai komitmen yang kuat terhadap perjuangan serikat pekerja untuk mendorong penegakkan hokum dibidang ketenagakerjaan dengan ikut mengawasi serta melaporkan aparat penegak hokum dari perilaku bermasalah dan korupsi.
+              5. Mendorong kepemimpinan FPBI yang mempunyai kemampuan membangun solidaritas dan soliditas terhadap seluruh pekerja anggota yang memiliki integritas kepribadian yang baik, keunggulan moral, amanah, dan profesional dibidang ketenagakerjaan.</b></h4>
+            </div>
+
+          </div>
+          
+        </div>
+        <!-- /.row -->
+        {% if messages %} {% for message in messages %} {% if message.tags == 'warning' %}
+        <script>
+          toastr.error('{{message}}')
+        </script>
+        {% endif %} {% endfor %} {% endif %}
+        {% endblock %}
+      </body>
+      {% include "base/footer.html" %}

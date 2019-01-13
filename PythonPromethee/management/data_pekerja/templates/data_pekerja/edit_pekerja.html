@@ -1,5 +1,5 @@
 {% extends 'layout/dashboard/index.html' %} 
-{% comment %} {% load widget_tweaks %} {% endcomment %}
+{% load widget_tweaks %}
 {% block content %}
 
 <div class="content-wrapper">
@@ -43,7 +43,8 @@
               </div>
               <div class="form-group">
                 <label for="" class="control-label">Tanggal Lahir</label>
-                <input required type="text" readonly id="date" class="form-control" name="tgl_lahir" value="{{pekerja.tgl_lahir}}">
+                {{<form class="tgl_lahir"></form>hir | add_class:"form-control" |append_attr:"placeholder:Input Register Number" |append_attr:"id:date" |append_attr:"readonly"}}
+
               </div> 
               <div class="form-group">
                 <label for="exampleInputEmail1">Alamat</label>

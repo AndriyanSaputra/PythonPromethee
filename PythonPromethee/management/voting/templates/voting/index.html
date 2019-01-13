@@ -24,11 +24,12 @@
         <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Ketua : {{a.nama_ketua}}</h3></br>
-              <h3 class="box-title">Wakil : {{a.nama_wakil}}</h3>
+              <h3 class="box-title ">Ketua : {{a.nama_ketua}}</h3>
+
+              <h3 class="box-title alignright">Wakil : {{a.nama_wakil}}</h3>
             </div>
             <form role="form">
-              <div class="box-body">
+              <div class="box-body box-profile">
                 <div class="form-group">
                   <div class="pull-left image">
                     <img src="{{a.picture.url}}" class="img-circle" style="width: 255px; height: 230px;" alt="User Image">
@@ -36,9 +37,35 @@
                     <hr>
                   </div>
                 </div>
+
                 <div class="box-footer" align="center">
                   <button type="submit" class="btn btn-success">Vote</button>
-                  <button type="submit" class="btn btn-info">Visi & Misi</button>
+
+                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{{a.id}}">Visi & Misi</button>
+                  <!-- Trigger the modal with a button -->
+
+                  <!-- Modal -->
+                  <div id="myModal{{a.id}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Visi Dan Misi</h4>
+                           <h4 class="modal-title"> {{a.nama_ketua}} Dan {{a.nama_wakil}} </h4>
+                        </div>
+                        <div class="modal-body">
+                          <p align="justify"> Visi : {{a.visi}}</p>
+                          <p align="justify"> Misi :  {{a.misi}}</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
@@ -46,11 +73,11 @@
         </div>
         {% endfor %}
 
-          <!-- /.modal -->
-        </section>
-        <!-- /.content -->
-      </div>
-      <!-- /.container -->
+        <!-- /.modal -->
+      </section>
+      <!-- /.content -->
     </div>
+    <!-- /.container -->
+  </div>
 
-    {% endblock %}
+  {% endblock %}

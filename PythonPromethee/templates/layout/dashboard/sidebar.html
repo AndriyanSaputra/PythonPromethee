@@ -16,28 +16,37 @@
         <li class="treeview active menu-open">
           <a href="#">
             <i class="fa fa-database"></i>
-            <span>Data Awal</span> 
+            <span>Data User</span> 
           </a>
           <ul class="treeview-menu">    
            <!--  <li><a href="{% url 'data_pekerja:view' %}"><i class="fa fa-circle-o"></i>Data Pekerja</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i>Data Pemilih</a></li> -->
 
             <li class="treeview menu-open">
-              <a href="#"><i class="fa fa-circle-o"></i> Data Pemilu
+              <a href="#"><i class="fa fa-caret-square-o-down"></i> Data Pemilu
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu" style="display: block;">
-                <li><a href="{% url 'data_pekerja:view' %}"><i class="fa fa-circle-o"></i> Data Pekerja</a></li>
-                <li><a href="{% url 'data_pemilih:view' %}"><i class="fa fa-circle-o"></i> Data Pemilih</a></li>
-                <li><a href="{% url 'data_calon:view' %}"><i class="fa fa-circle-o"></i> Data Calon</a></li>
+                <li><a href="{% url 'data_pekerja:view' %}"><i class="fa fa-user"></i> Data Pekerja</a></li>
+                <li><a href="{% url 'data_pemilih:view' %}"><i class="fa fa-user"></i> Data Pemilih</a></li>
+                <li><a href="{% url 'data_calon:view' %}"><i class="fa fa-user"></i> Data Calon</a></li>
 
               </ul>
             </li>
 
 
 
+            
+          </ul>
+        </li>
+        <li class="treeview active menu-open">
+          <a href="#">
+            <i class="fa fa-database"></i>
+            <span>Data Promethee</span> 
+          </a>
+          <ul class="treeview-menu">
             <li class="treeview menu-open">
               <a href="#"><i class="fa fa-circle-o"></i> Nilai Preferensi
                 <span class="pull-right-container">

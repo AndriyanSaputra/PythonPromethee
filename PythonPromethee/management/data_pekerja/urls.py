@@ -1,7 +1,6 @@
 from django.conf.urls import url
 from management.data_pekerja import views
 
-
 urlpatterns = [
     url (r'^$', views.ListDataPekerjaView.as_view(), name='view'),
     
