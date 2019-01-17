@@ -44,6 +44,7 @@ class SaveDataCalonView(View):
             calon.misi = calon_form.cleaned_data['misi']
             calon.picture = calon_form.cleaned_data['picture']
             calon.picture2 = calon_form.cleaned_data['picture2']
+            calon.score = calon_form.cleaned_data['score']
             calon.save()
 
 

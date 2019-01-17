@@ -28,7 +28,8 @@
 
               <h3 class="box-title alignright">Wakil : {{a.nama_wakil}}</h3>
             </div>
-            <form role="form">
+            <form role="form" action="{% url 'voting:update_calon' id=a.id %}" method="POST">
+              {% csrf_token %}
               <div class="box-body box-profile">
                 <div class="form-group">
                   <div class="pull-left image">
@@ -39,9 +40,15 @@
                 </div>
 
                 <div class="box-footer" align="center">
-                  <button type="submit" class="btn btn-success">Vote</button>
+                  <!-- <a href="{% url 'voting:hapus_pemilih' id=request.user.pemilih.id %}" class="btn btn-success">Vote</a> -->
+
 
                   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{{a.id}}">Visi & Misi</button>
+                  <input type="" name="" value="{{a.score}}" id="awal{{a.id}}" hidden="true">
+                  <input type="number" name="score" id="hasil{{a.id}}" hidden="true">
+
+                  <button type="submit" class="btn btn-success">Vote</button>
+
                   <!-- Trigger the modal with a button -->
 
                   <!-- Modal -->
@@ -53,12 +60,16 @@
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
                           <h4 class="modal-title">Visi Dan Misi</h4>
-                           <h4 class="modal-title"> {{a.nama_ketua}} Dan {{a.nama_wakil}} </h4>
+                          <h4 class="modal-title"> {{a.nama_ketua}} Dan {{a.nama_wakil}} </h4>
                         </div>
                         <div class="modal-body">
                           <p align="justify"> Visi : {{a.visi}}</p>
                           <p align="justify"> Misi :  {{a.misi}}</p>
                         </div>
+                        <script>
+                          var a = document.getElementById('awal{{a.id}}').value;
+                          document.getElementById('hasil{{a.id}}').value = parseInt(a) + 1;
+                        </script>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
