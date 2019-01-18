@@ -38,12 +38,10 @@ class SaveDataCalonView(View):
         if calon_form.is_valid():
 
             calon = Calon()
-            calon.nama_ketua = calon_form.cleaned_data['nama_ketua']
-            calon.nama_wakil = calon_form.cleaned_data['nama_wakil']
+            calon.nama_calon = calon_form.cleaned_data['nama_calon']
             calon.visi = calon_form.cleaned_data['visi']
             calon.misi = calon_form.cleaned_data['misi']
             calon.picture = calon_form.cleaned_data['picture']
-            calon.picture2 = calon_form.cleaned_data['picture2']
             calon.score = calon_form.cleaned_data['score']
             calon.save()
 
@@ -82,8 +80,7 @@ class UpdateDataCalonView(View):
 
                 # pekerja.user = user
 
-            calon.nama_ketua = calon_form.cleaned_data['nama_ketua']
-            calon.nama_wakil = calon_form.cleaned_data['nama_wakil']
+            calon.nama_calon = calon_form.cleaned_data['nama_calon']
             calon.visi = calon_form.cleaned_data['visi']
             calon.misi= calon_form.cleaned_data['misi']
             newpic = calon_form.cleaned_data.get('picture', None)
@@ -91,7 +88,6 @@ class UpdateDataCalonView(View):
             if not newpic == None:
                     calon.picture = newpic
                     
-            newpic2 = calon_form.cleaned_data.get('picture2', None)
 
             if not newpic == None:
                     calon.picture2 = newpic2

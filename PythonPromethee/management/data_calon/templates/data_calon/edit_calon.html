@@ -22,26 +22,17 @@
         <i class="fa fa-upload"></i>
       </button>
     </div>
-    <div class="col-md-4">
-      <img src="{{calon.picture2.url}}" id="picture2" alt="" style="width: 340px; height: 320px; border: 1px #d5d8dc solid; margin-top: 6px;">
-      <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput2').click();">Upload Foto Wakil
-        <i class="fa fa-upload"></i>
-      </button>
-    </div>
+    
     <!-- <div class="container"> -->
       <div class="box-body">
         <form action="{% url 'data_calon:update_calon' calon.id %}" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
 
               <div class="form-group">
-                <label for="exampleInputEmail1">Nama Calon Ketua</label>
-                <input name = "nama_ketua" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Ketua" value="{{calon.nama_ketua}}" >
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Nama Calon Wakil</label>
-                <input name = "nama_wakil" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Wakil" value="{{calon.nama_wakil}}" >
+                <label for="exampleInputEmail1">Nama Calon </label>
+                <input name = "nama_ketua" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Calon" value="{{calon.nama_calon}}" >
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Visi</label>
@@ -57,15 +48,13 @@
                 <input id="fileInput" name='picture' type="file" style="display:none;" accept="image/*" />
               </div>
               <div class="form-group">
-                <input id="fileInput2" name='picture2' type="file" style="display:none;" accept="image/*" />
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="{%url 'data_calon:view'%}" class="btn btn-danger">Cancel</a>
               </div>
             </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary">Save</button>
-              <a href="{%url 'data_calon:view'%}" class="btn btn-danger">Cancel</a>
-  
-            </div>
+            
           </div>
+
           
         </form>
         <!-- </div> -->
@@ -98,21 +87,6 @@
     $("#fileInput").change(function () {
       readURL(this);
     }); 
-    function readURLTwo(input) {
-
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          $('#picture2').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-    $("#fileInput2").change(function () {
-      readURLTwo(this);
-    });         
 
   </script>
 

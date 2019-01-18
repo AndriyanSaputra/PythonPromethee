@@ -20,6 +20,11 @@ class ListDataVotingView(View):
         }
         return render(request, template, data)
 
+class sayatonho(View):
+    def get(self, request):
+        template = 'voting/vot.html'
+       
+        return render(request, template)
 
 class HapusDataPemilihView(View):
     def get(self, request, id):
@@ -27,7 +32,7 @@ class HapusDataPemilihView(View):
         if pemilih.exists():
             pemilih.first().delete()
             messages.add_message(request, messages.INFO, 'Data Berhasil Dihapus')                                       
-            return redirect('data_pemilih:view')
+            return redirect('login:view')
         else:
             messages.add_message(request, messages.INFO, 'Data Gagal Dihapus !!') 
             
@@ -43,6 +48,6 @@ class UpdateDataCalonView(View):
             calon.save(force_update=True)
             messages.add_message(request, messages.INFO, 'Data Berhasil Diupdate')  
 
-            return redirect('voting:view')
+            return redirect('voting:tonho')
         else:
             return HttpResponse(calon_form.errors)

@@ -3,9 +3,9 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-         Detail Pekerja {{calon.nama_ketua}}
-     </h1>
-     <ol class="breadcrumb">
+           Detail Pekerja {{calon.nama_ketua}}
+       </h1>
+       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Detail Data Calon </a></li>
     </ol>
 </section>
@@ -16,29 +16,20 @@
             <div class="box box-success">
                 <div class="box-body">
                     <div class="col-md-4 col-sm-4">
-                        <p  style="text-align: center; font-size: 18px; padding-top: 8px;">Foto Calon Ketua</p>
+                        <p  style="text-align: center; font-size: 18px; padding-top: 8px;">Foto Calon </p>
                         <img src="{{calon.picture.url}}" alt="" style="width: 300px; height: 260px; border: 1px #d5d8dc solid">
                         <p style="text-align: center; font-size: 18px; padding-top: 8px;"></p>
+                        <a href="{% url 'data_calon:edit_calon' calon.id %}" class="btn btn-success btn-block" style="margin-bottom: 8px">Ubah Info <i class="fa fa-pencil"></i></a>
                     </div> 
-                    <div class="col-md-4 col-sm-4">
-                        <p  style="text-align: center; font-size: 18px; padding-top: 8px;">Foto Calon Wakil</p>
-                        <img src="{{calon.picture2.url}}" alt="" style="width: 300px; height: 260px; border: 1px #d5d8dc solid">
-                        <p style="text-align: center; font-size: 18px; padding-top: 8px;"></p>
-                    </div> 
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-md-6 col-sm-6">
                         <table class="table table-responsive table-striped table-hover">
                             <h4 class="fa-pull-right">Profil Pekerja</h4>
                             <table class="table table-responsive table-striped table-hover">
                                 <tbody>
                                     <tr>
-                                        <td style="width: 30%">Nama Ketua</td>
+                                        <td style="width: 30%">Nama Calon</td>
                                         <td>:</td>
-                                        <td>{{calon.nama_ketua}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 30%">Nama Wakil</td>
-                                        <td>:</td>
-                                        <td>{{calon.nama_wakil}}</td>
+                                        <td>{{calon.nama_calon}}</td>
                                     </tr>
                                     <tr>
                                         <td style="width: 30%">Visi</td>
@@ -50,10 +41,15 @@
                                         <td>:</td>
                                         <td>{{calon.misi}}</td>
                                     </tr>
+                                    <tr>
+                                        <td style="width: 30%">Score</td>
+                                        <td>:</td>
+                                        <td>{{calon.score}}</td>
+                                    </tr>
 
                                 </tbody>
                             </table>
-                            <a href="{% url 'data_calon:edit_calon' calon.id %}" class="btn btn-success btn-block" style="margin-bottom: 8px">Ubah Info <i class="fa fa-pencil"></i></a>
+
                         </div>
                     </div>
                 </div>

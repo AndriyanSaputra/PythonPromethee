@@ -4,6 +4,7 @@ from management.voting import views
 
 urlpatterns = [
     url (r'^$', views.ListDataVotingView.as_view(), name='view'),
+    url (r'^tonho$', views.sayatonho.as_view(), name='tonho'),
     # url (r'^add_calon$', views.AddCalonView.as_view(), name='add_calon'),
     # url (r'^save_calon$', views.SaveDataCalonView.as_view(), name='save_calon'),
     url (r'^hapus_pemilih/(?P<id>\d+)$', views.HapusDataPemilihView.as_view(), name='hapus_pemilih'),

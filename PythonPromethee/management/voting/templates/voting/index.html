@@ -40,14 +40,45 @@
                 </div>
 
                 <div class="box-footer" align="center">
-                  <!-- <a href="{% url 'voting:hapus_pemilih' id=request.user.pemilih.id %}" class="btn btn-success">Vote</a> -->
+                  
 
 
                   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{{a.id}}">Visi & Misi</button>
                   <input type="" name="" value="{{a.score}}" id="awal{{a.id}}" hidden="true">
                   <input type="number" name="score" id="hasil{{a.id}}" hidden="true">
 
-                  <button type="submit" class="btn btn-success">Vote</button>
+
+
+
+
+                  <!-- Trigger the modal with a button -->
+                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalj{{a.id}}">vote</button>
+
+                  <!-- Modal -->
+                  <div id="myModalj{{a.id}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                          <h3>Apakah anda yakin ingin mengevote calon ini ???</h3>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-default">Vote</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+
+
+
+
 
                   <!-- Trigger the modal with a button -->
 
@@ -55,7 +86,7 @@
                   <div id="myModal{{a.id}}" class="modal fade" role="dialog">
                     <div class="modal-dialog">
 
-                      <!-- Modal content-->
+
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal">&times;</button>

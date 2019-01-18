@@ -20,7 +20,7 @@
                 <div class="col-md-12">
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            Tambahkan Data Calon Ketua dan Wakil 
+                            Tambahkan Data Calon 
                         </div>
                     </div>
                     <form action="{% url 'data_calon:save_calon' %}" method="POST" enctype="multipart/form-data">
@@ -29,82 +29,54 @@
                             <img src="{% static 'images/icon.png' %}" id="picture" alt="" style="width: 330px; height: 320px;">
                             <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput').click();">Upload Gambar <i class="fa fa-upload"></i>
                             </button>
-                            <div class="form-group">
-                                <label for="" class="control-label">Nama Calon Ketua</label>
-                                <input type="text" class="form-control" name="nama_ketua"  required>
-                            </div>
+                            
                             <div class="form-group">
                                 <input id="fileInput" name='picture' type="file" style="display:none;" accept="image/*" value="" />
                             </div>
                         </div>
                         <div class="col-md-4">
-                          <img src="{% static 'images/icon.png' %}" id="picture2" alt="" style="width: 330px; height: 320px;">
-                          <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput2').click();">Upload Gambar <i class="fa fa-upload"></i>
-                          </button>
-                          <div class="form-group">
-                            <label for="" class="control-label">Nama Calon Wakil</label>
-                            <input type="text" class="form-control" name="nama_wakil"  required>
-                        </div>
-                        <div class="form-group">
-                            <input id="fileInput2" name='picture2' type="file" style="display:none;" accept="image/*" value="" />
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label for="" class="control-label">Nama Calon </label>
+                                <input type="text" class="form-control" name="nama_calon"  required>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label">Visi</label>
+                                <textarea name="visi" rows="5" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label">Misi</label>
+                                <textarea name="misi" rows="5" class="form-control" required></textarea>
+                            </div>
+                            <div align="right">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <a href="{%url 'data_calon:view'%}" class="btn btn-danger">Cancel</a>
 
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="" class="control-label">Visi</label>
-                            <textarea name="visi" rows="8" class="form-control" required></textarea>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">Misi</label>
-                            <textarea name="misi" rows="8" class="form-control" required></textarea>
-                        </div>
-                        <div align="right">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                            <a href="{%url 'data_calon:view'%}" class="btn btn-danger">Cancel</a>
-                            
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
 
-    </section>
+        </section>
 
-</div>
-<script>
-    $('#date').datepicker();
+    </div>
+    <script>
+        $('#date').datepicker();
 
-    function readURL(input) {
+        function readURL(input) {
 
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#picture').attr('src', e.target.result);
+                reader.onload = function (e) {
+                    $('#picture').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
             }
-
-            reader.readAsDataURL(input.files[0]);
         }
-    }
-    $("#fileInput").change(function () {
-        readURL(this);
-    });      
-
-    function readURLTwo(input) {
-
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#picture2').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $("#fileInput2").change(function () {
-        readURLTwo(this);
-    });      
-</script>
-{% endblock %}
+        $("#fileInput").change(function () {
+            readURL(this);
+        });         
+    </script>
+    {% endblock %}

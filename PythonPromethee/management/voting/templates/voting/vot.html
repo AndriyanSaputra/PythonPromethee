@@ -1,0 +1,8 @@
+{% extends 'layout/voting/index.html' %}
+{% load staticfiles %}
+{% block content %}
+
+
+<h1>Saya tonho </h1>
+<a href="{% url 'voting:hapus_pemilih' id=request.user.pemilih.id %}" class="btn btn-success">Vote</a>
+{% endblock %}
