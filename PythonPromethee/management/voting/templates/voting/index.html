@@ -8,7 +8,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Halaman E-Voting Pemilihan Umum
+        Silahkan Memilih Dengan Bijaksana
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -21,12 +21,11 @@
     <section class="content">
       {% for a in calon %}
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title ">Ketua : {{a.nama_ketua}}</h3>
+              <h3 class="box-title ">Calon : {{a.nama_calon}}</h3>
 
-              <h3 class="box-title alignright">Wakil : {{a.nama_wakil}}</h3>
             </div>
             <form role="form" action="{% url 'voting:update_calon' id=a.id %}" method="POST">
               {% csrf_token %}
@@ -34,24 +33,14 @@
                 <div class="form-group">
                   <div class="pull-left image">
                     <img src="{{a.picture.url}}" class="img-circle" style="width: 255px; height: 230px;" alt="User Image">
-                    <img src="{{a.picture2.url}}" class="img-circle" style="width: 255px; height: 230px;" alt="User Image">
                     <hr>
                   </div>
                 </div>
 
                 <div class="box-footer" align="center">
-                  
-
-
                   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{{a.id}}">Visi & Misi</button>
                   <input type="" name="" value="{{a.score}}" id="awal{{a.id}}" hidden="true">
                   <input type="number" name="score" id="hasil{{a.id}}" hidden="true">
-
-
-
-
-
-                  <!-- Trigger the modal with a button -->
                   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalj{{a.id}}">vote</button>
 
                   <!-- Modal -->
