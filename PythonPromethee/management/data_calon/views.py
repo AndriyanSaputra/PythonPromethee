@@ -82,14 +82,12 @@ class UpdateDataCalonView(View):
             calon.nama_calon = calon_form.cleaned_data['nama_calon']
             calon.visi = calon_form.cleaned_data['visi']
             calon.misi= calon_form.cleaned_data['misi']
-            newpic = calon_form.cleaned_data.get('picture', None)
+            newpic = calon_form.cleaned_data.get('picture', None) 
 
             if not newpic == None:
                     calon.picture = newpic
                     
 
-            if not newpic == None:
-                    calon.picture2 = newpic2
                     
             calon.save(force_update=True)
             messages.add_message(request, messages.INFO, 'Data Berhasil Diupdate')  

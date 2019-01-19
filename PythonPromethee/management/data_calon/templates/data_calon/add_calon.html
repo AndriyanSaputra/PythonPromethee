@@ -31,7 +31,7 @@
                             </button>
                             
                             <div class="form-group">
-                                <input id="fileInput" name='picture' type="file" style="display:none;" accept="image/*" value="" />
+                                <input id="fileInput" name='picture' type="file" style="display:none;" accept="image/*" value="{{calon.picture}}" />
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -77,6 +77,6 @@
         }
         $("#fileInput").change(function () {
             readURL(this);
-        });         
+        };         
     </script>
     {% endblock %}
