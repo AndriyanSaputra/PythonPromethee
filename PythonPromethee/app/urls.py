@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^datapemilih/', include('management.data_pemilih.urls', namespace='data_pemilih')),
     url(r'^data_calon/', include('management.data_calon.urls', namespace='data_calon')),
     url(r'^voting/', include('management.voting.urls', namespace='voting')),
+    # url(r'^data_user/', include('data_user.urls', namespace='data_user')),
 ]
 
 urlpatterns +=  staticfiles_urlpatterns()

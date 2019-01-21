@@ -25,6 +25,7 @@ PROJECT_APPS = [
     'management.data_pemilih',
     'management.data_calon',
     'management.voting',
+    # 'data_user',
     'hakakses',
     'login',
     'helper',

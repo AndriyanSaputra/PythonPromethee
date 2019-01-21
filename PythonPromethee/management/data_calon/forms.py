@@ -6,7 +6,7 @@ class CalonForm(forms.Form):
 	nama_calon = forms.CharField(max_length=100)
 	visi = forms.CharField(max_length=100)
 	misi = forms.CharField(max_length=100)
-	picture = forms.ImageField(required=False)
+	picture = forms.ImageField(initial="pemilih/profile/icon.png")
 
 		
 	class Meta:

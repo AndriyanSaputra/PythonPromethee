@@ -16,7 +16,7 @@ class PemilihForm(forms.Form):
 	nama = forms.CharField(max_length=100)
 	nama_ptp =forms.CharField(max_length=100)
 	jenis_kelamin = forms.CharField(max_length=30)
-	picture = forms.ImageField(required=False)	
+	picture = forms.ImageField(initial="pemilih/profile/icon.png")	
 		
 	class Meta:
   		model = Pemilih

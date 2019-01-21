@@ -2,7 +2,15 @@
 {% load staticfiles %}
 {% block content %}
 
+<div class="container">
 
-<h1>Saya tonho </h1>
-<a href="{% url 'voting:hapus_pemilih' id=request.user.pemilih.id %}" class="btn btn-success">Vote</a>
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Terima Kasih</h1>
+        <p>Silahakan Menekan Button Selesai Vote Anda Akan Di Proses Oleh Sistem</p>
+          <a class="btn btn-lg btn-primary" href="{% url 'voting:hapus_pemilih' id=request.user.pemilih.id %}" role="button">Selesai »»</a>
+        </p>
+      </div>
+    </div>
+
 {% endblock %}
