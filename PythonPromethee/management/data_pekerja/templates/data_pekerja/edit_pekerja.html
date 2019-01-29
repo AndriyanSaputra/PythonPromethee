@@ -131,8 +131,7 @@
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="{% url 'data_pekerja:view'%}" type="submit" class="btn btn-danger">Cancel</a>
           </div>
-          <div  class=form-group">
-          <div></div> 
+          <div  hidden class="form-group"> 
           <label for="" class="control-label">Nilai Pendidika Tahap Dua</label>
             <input type="text" class="form-control" id="pt2" name="nilaipt2" value="{{pekerja.Petaduas.nilai}}" required>
           </div>
@@ -204,14 +203,20 @@
       var hadir = document.getElementById('kehadiran');
       var langgar = document.getElementById('pelanggaran');
       var hasil = (parseInt(hadir.value) + parseInt(langgar.value))/2;
-      if(hasil > 90){
+      if(hasil > 81){
         dsp.value = 1;
-      }else if(hasil > 80){
+      }else if(hasil > 61){
         dsp.value = 2;
-      }else if(hasil > 70){
+      }else if(hasil > 0){
         dsp.value = 3;
-      }else{
-        dsp.value = 4;
+      }
+      if(hadir.value > 100){
+          alert('melebihi batas');
+          hadir.value = ''
+      }
+      if(langgar.value > 100){
+          alert('melebihi batas');
+          langgar.value = ''
       }
     }
     function kes(){
@@ -228,29 +233,41 @@
       var intel = document.getElementById('intelegensi');
       var kep = document.getElementById('kepribadian');
       var hasil = (parseInt(intel.value) + parseInt(kep.value))/2;
-      if(hasil > 90){
+      if(hasil > 81){
         psk.value = 1;
-      }else if(hasil > 80){
+      }else if(hasil > 61){
         psk.value = 2;
-      }else if(hasil > 70){
+      }else if(hasil > 0){
         psk.value = 3;
-      }else{
-        psk.value = 4;
+      }
+      if(intel.value > 100){
+          alert('melebihi batas');
+          intel.value = ''
+      }
+      if(kep.value > 100){
+          alert('melebihi batas');
+          kep.value = ''
       }
     }
     function pet(){
       var pt2 = document.getElementById('pt2');
       var teo = document.getElementById('teori');
-      var prak = document.getElementById('praktik');
+      var prak = document.getElementById('praktek');
       var hasil = (parseInt(teo.value) + parseInt(prak.value))/2;
-      if(hasil > 90){
+      if(hasil > 81){
         pt2.value = 1;
-      }else if(hasil > 80){
+      }else if(hasil > 61){
         pt2.value = 2;
-      }else if(hasil > 70){
+      }else if(hasil > 0){
         pt2.value = 3;
-      }else{
-        pt2.value = 4;
+      }
+      if(teo.value > 100){
+          alert('melebihi batas');
+          teo.value = ''
+      }
+      if(prak.value > 100){
+          alert('melebihi batas');
+          prak.value = ''
       }
     }
   </script>
