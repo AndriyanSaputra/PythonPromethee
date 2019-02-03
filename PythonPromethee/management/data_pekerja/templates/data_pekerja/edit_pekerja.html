@@ -87,7 +87,7 @@
                 <input type="number" class="form-control" name="kehadiran"  required id="kehadiran" onkeyup="dspl()"value="{{pekerja.Disiplins.kehadiran}}">
               </div>
               <div class="form-group">
-                <label for="" class="control-label">Pelanggaran</label>
+                <label for="" class="control-label">Sikap & Prilaku</label>
                 <input type="number" class="form-control" name="pelanggaran"  required id="pelanggaran" onkeyup="dspl()" value="{{pekerja.Disiplins.pelanggaran}}">
               </div>
               <div hidden class="form-group">
@@ -99,7 +99,7 @@
                 <input required type="radio" name="status_kes" value="Sehat"{% if pekerja.Kesehatans.status_kes == 'Sehat' %} checked {% endif %}> Sehat &nbsp;
                 <input required type="radio" name="status_kes" value="Tidak Sehat" {% if pekerja.Kesehatans.status_kes == 'Tidak Sehat' %} checked {% endif %}> Tidak Sehat
               </div>
-              <div  class="form-group">
+              <div hidden class="form-group">
                 <label for="" class="control-label">Nilai Kesehatan</label> 
                 <input type="text" class="form-control" id="kes" name="nilaikh" value="{{pekerja.Kesehatans.nilai}}" required>
               </div>
@@ -127,13 +127,13 @@
             <input type="number" class="form-control" name="praktek"  required id="praktek" onkeyup="pet()" value="{{pekerja.Petaduas.praktek}}">
           </div>
           <br>
+          <div hidden class="form-group"> 
+          <label for="" class="control-label">Nilai Pendidika Tahap Dua</label>
+            <input type="text" class="form-control" id="pt2" name="nilaipt2" value="{{pekerja.Petaduas.nilai}}" required>
+          </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="{% url 'data_pekerja:view'%}" type="submit" class="btn btn-danger">Cancel</a>
-          </div>
-          <div  hidden class="form-group"> 
-          <label for="" class="control-label">Nilai Pendidika Tahap Dua</label>
-            <input type="text" class="form-control" id="pt2" name="nilaipt2" value="{{pekerja.Petaduas.nilai}}" required>
           </div>
           <div class="form-group">
             <input id="fileInput" name='picture' type="file" style="display:none;" accept="image/*" />
