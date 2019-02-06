@@ -25,23 +25,25 @@
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title ">Calon : {{a.nama_calon}}</h3>
-
             </div>
             <form role="form" action="{% url 'voting:update_calon' id=a.id %}" method="POST">
               {% csrf_token %}
               <div class="box-body box-profile">
                 <div class="form-group">
                   <div class="" align="center">
-                    <img src="{{a.picture.url}}" class="img-circle" style="width: 450px; height: 450px;" alt="User Image">
+                    <img src="{{a.picture.url}}" class="img-circle" style="width: 250px; height: 250px;" alt="User Image">
                     <hr>
                   </div>
                 </div>
-
-                <div class="box-footer" align="center">
-                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{{a.id}}">Visi & Misi</button>
+              <div class="box-footer" align="center">
+                <ul align="justify">
+                  <textarea cols="60" rows="2">{{a.visi}}</textarea>
+                </ul>
+              </div>
+                <div class="box-footer" aManagementAccessViewlign="center">
                   <input type="" name="" value="{{a.score}}" id="awal{{a.id}}" hidden="true">
                   <input type="number" name="score" id="hasil{{a.id}}" hidden="true">
-                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalj{{a.id}}">vote</button>
+                  <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModalj{{a.id}}">Vote</button>
 
                   <!-- Modal -->
                   <div id="myModalj{{a.id}}" class="modal fade" role="dialog">
@@ -63,19 +65,11 @@
 
                     </div>
                   </div>
-
-
-
-
-
-
                   <!-- Trigger the modal with a button -->
 
                   <!-- Modal -->
                   <div id="myModal{{a.id}}" class="modal fade" role="dialog">
                     <div class="modal-dialog">
-
-
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
